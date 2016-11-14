@@ -8,14 +8,13 @@
  *
  * @author Marcos
  */
-import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 // falta baixar o driver do postgre e botar no projeto
 
-public class BdConnector {
+public class BdConnector throws SQLException{
    static String url = "jdbc:postgresql://localhost:5432/cia_aerea",
                     user = "postgres",
                     password = "123456";
