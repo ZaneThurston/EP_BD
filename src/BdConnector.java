@@ -68,37 +68,7 @@ public class BdConnector {
      * 
      * 
      */
-    public static void insere_comissario(int pes_cpf, String com_cht) {
-		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
-				"','"+com_cht+"');";
-		Connect();
-		try {
-			Statement stm = con.createStatement();
-			stm.executeUpdate(sql);
-		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
-		}
-		CloseConnection();
-	}
- 
-	static void lista_comissario() {
-		String sql = "SELECT * FROM comissario";
-		Connect();
-		try {
-			Statement stm = con.createStatement();
-			ResultSet consulta = stm.executeQuery(sql);
-			while(consulta.next()) {
-				int cpf = consulta.getInt("pes_cpf");
-				String com_cht = consulta.getString("com_cht");
-				System.out.println(com_cht+" - "+cpf);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CloseConnection();
-	}
-    static void insere_comissario_linguas(int com_lin_cpf, String com_lin_lingua) {
+     static void insere_comissario_linguas(int com_lin_cpf, String com_lin_lingua) {
 		String sql = "INSERT INTO piloto (com_lin_cpf,com_lin_lingua) VALUES ('"+com_lin_cpf+
 				"','"+com_lin_lingua+"');";
 		Connect();
@@ -179,7 +149,6 @@ public class BdConnector {
 		String sql = "SELECT * FROM comissario";
 		Connect();
 				
-		System.out.println("com_cht - pes_cpf");
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = con.executeQuery(sql);
@@ -299,7 +268,6 @@ public class BdConnector {
 		Connect();
 		try {
 			Statement stm = con.createStatement();
-			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
@@ -393,6 +361,50 @@ public class BdConnector {
 		CloseConnection();
 	}	
 }
+public static void insere_pessoa(int pes_cpf, String pes_nome,char pes_sexo,date pes_bday,String pes_mail,String pes_rua,int pes_numero,String pes_bairro,String pes_complemento,
+	boolean pes_flag_cliente, boolean pes_flag_empregado, int pes_cod_func, String pes_tipo_func, String pes_passaporte, String pes_necessidades_especiais) {
+		String sql = "INSERT INTO pessoa (pes_cpf, pes_nome, pes_sexo, pes_bday, pes_mail, pes_rua, pes_numero, pes_bairro, pes_complemento, pes_flag_cliente, pes_flag_empregado, 
+		pes_cod_func, pes_tipo_func, pes_passaporte, pes_necessidades_especiais) VALUES ('"+pes_cpf+"','"+pes_nome+"','"+pes_sexo+"','"+pes_bday+"','"+pes_mail+"','"+pes_rua+"',
+		'"+pes_numero+"','"+pes_bairro+"','"+pes_complemento+"','"+pes_flag_cliente+"','"+pes_flag_empregado+"','"+pes_cod_func+"','"+pes_tipo_func+"','"+pes_passaporte+"','"+pes_necessidades_especiais+"');";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
+		}
+		CloseConnection();
+	}
+ 
+	static void lista_pessoa() {
+		String sql = "SELECT * FROM pessoa";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				int cpf = consulta.getInt("pes_cpf");
+				String nome = consulta.getString("pes_nome");
+				String sexo = consulta.getString("pes_sexo");
+				date bday = consulta.getDate("pes_bday");
+				String mail = consulta.getString("pes_mail");
+				String rua = consulta.getString("pes_rua");
+				int numero = consulta.getInt("pes_numero");
+				String bairro = consulta.getString("pes_bairro");
+				String complemento = consulta.getString("pes_complemento");
+				boolean cliente =consulta.getBoolean("pes_flag_cliente");
+				boolean empregado = consulta.getBoolean("pes_flag_empregado");
+				int codigo_func = consulta.getInt("pes_cod_func");
+				String tipo_func = consulta.getString("pes_tipo_func");
+				String passaporte = consulta.getString("pes_passaporte");
+				String necessidades_especiais = consulta.getString("pes_necessidades_especiais");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CloseConnection();
+	}
   public static void Search(String dbl) {
         try {
             Statement stm = con.createStatement();
