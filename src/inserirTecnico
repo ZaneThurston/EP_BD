@@ -1,0 +1,29 @@
+static void insereTecnico(int pes_cpf, String tec_anac, String tec_tipo_contrato) {
+		String sql = "INSERT INTO piloto (pes_cpf,tec_anac,tec_tipo_contrato) VALUES ('"+pes_cpf+
+				"','"+tec_anac+"','"+tec_tipo_contrato+"');";
+		Conexao con = new Conexao();
+		int res = con.executeUpdate(sql);
+		if (res >= 1) {
+			System.out.println("Inserção realizada!");
+		} else {
+			System.err.println("Inserção NÃO realizada!");
+		}
+	}
+ 
+	static void lista() {
+		String sql = "SELECT * FROM tecnico_manutencao";
+		Conexao con = new Conexao();
+				
+		try {
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				int cpf = consulta.getInt("pes_cpf");
+				String anac = consulta.getString("tec_anac");
+				String tipo_contrato = consulta.getString("tec_tipo_contrato");
+				System.out.println(cpf+" - "+anac+" - "+tipo_contrato);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	

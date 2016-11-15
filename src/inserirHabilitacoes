@@ -1,0 +1,28 @@
+static void insereHabilitacoes(int pil_hab_cpf, String pil_hab_habilitacao) {
+		String sql = "INSERT INTO piloto (pil_hab_cpf,pil_hab_habilitacao) VALUES ('"+pil_hab_cpf+
+				"','"+pil_hab_habilitacao+"');";
+		Conexao con = new Conexao();
+		int res = con.executeUpdate(sql);
+		if (res >= 1) {
+			System.out.println("Inserção realizada!");
+		} else {
+			System.err.println("Inserção NÃO realizada!");
+		}
+	}
+ 
+	static void lista() {
+		String sql = "SELECT * FROM piloto_habilitacoes";
+		Conexao con = new Conexao();
+				
+		try {
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				int cpf = consulta.getInt("pil_hab_cpf");
+				String habilitacao = consulta.getString("pil_hab_habilitacao");
+				System.out.println(cpf+" - "+habilitacao+" - ");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	

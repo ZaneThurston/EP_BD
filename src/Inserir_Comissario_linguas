@@ -1,0 +1,28 @@
+static void insereComissario_linguas(int com_lin_cpf, String com_lin_lingua) {
+		String sql = "INSERT INTO piloto (com_lin_cpf,com_lin_lingua) VALUES ('"+com_lin_cpf+
+				"','"+com_lin_lingua+"');";
+		Conexao con = new Conexao();
+		int res = con.executeUpdate(sql);
+		if (res >= 1) {
+			System.out.println("Inserção realizada!");
+		} else {
+			System.err.println("Inserção NÃO realizada!");
+		}
+	}
+ 
+	static void lista() {
+		String sql = "SELECT * FROM comissario_linguas";
+		Conexao con = new Conexao();
+				
+		try {
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				int cpf = consulta.getInt("com_lin_cpf");
+				String lingua = consulta.getString("com_lin_lingua");
+				System.out.println(cpf+" - "+lingua+" - ");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}	
