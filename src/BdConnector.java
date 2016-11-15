@@ -194,6 +194,41 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}	
+	static void insere_aeroporto(String aer_icao, String aer_nome, String aer_cidade, String aer_estado, boolean aer_oficina, int aer_hub, String aer_park) {
+		String sql = "INSERT INTO aeroporto (aer_icao,aer_nome,aer_cidade,aer_estado,aer_oficina,aer_hub,aer_park) VALUES ('"+aer_icao+
+				"','"+aer_nome+"','"+aer_cidade+"','"+aer_estado+"','"+aer_oficina+"','"+aer_hub+"','"+aer_park+"');";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
+		}
+		CloseConnection();
+	}
+ 
+	static void lista_aeroporto() {
+		String sql = "SELECT * FROM aeroporto";
+		Connect();				
+		try {
+			Statement stm = con.createStatement();
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				String icao = consulta.getString("aer_icao");
+				String  nome = consulta.getString("aer_nome");
+				String  cidade = consulta.getString("aer_cidade");
+				String  estado = consulta.getSring("aer_estado");
+				boolean  oficina = consulta.getBoolean("aer_oficina");
+				int  hub = consulta.getInt("aer_hub");
+				String  park = consulta.getString("aer_park");
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CloseConnection();
+	}	
 
 	static void insere_comissario(int pes_cpf, String com_cht) {
 		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
