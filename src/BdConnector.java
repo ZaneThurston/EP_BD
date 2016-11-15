@@ -16,7 +16,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-// falta baixar o driver do postgre e botar no projeto
+
 
 public class BdConnector {
    static String url = "jdbc:postgresql://localhost:5432/cia_aerea",
@@ -58,7 +58,16 @@ public class BdConnector {
         
     }
     
-    
+    /*
+     * Cada método precisa chamar o método Connect() para conectar ao BD e CloseConnection() para fechar a conexão
+     * Objeto statement: pra ele é passado a string com o comando sql e executada no BD
+     * É necessário um bloco try catch para capturar a exceção do sql quando usar o objeto statement
+     * Os métodos de inserção devem receber as variáveis já no formato correto
+     * 
+     * 
+     * 
+     * 
+     */
     public static void insereComissario(int pes_cpf, String com_cht) {
 		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
 				"','"+com_cht+"');";
@@ -67,7 +76,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores");
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
 		}
 		CloseConnection();
 	}
