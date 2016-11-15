@@ -69,7 +69,7 @@ public class BdConnector {
      * 
      */
      static void insere_comissario_linguas(int com_lin_cpf, String com_lin_lingua) {
-		String sql = "INSERT INTO piloto (com_lin_cpf,com_lin_lingua) VALUES ('"+com_lin_cpf+
+		String sql = "INSERT INTO comissario_linguas (com_lin_cpf,com_lin_lingua) VALUES ('"+com_lin_cpf+
 				"','"+com_lin_lingua+"');";
 		Connect();
 		try {
@@ -101,7 +101,7 @@ public class BdConnector {
 	}
 
 	static void insere_rota(int rot_codigo, String aer_icao_origem, String aer_icao_destino, String rot_frequencia) {
-		String sql = "INSERT INTO piloto (rot_codigo,aer_icao_origem,aer_icao_destino,rot_frequencia) VALUES ('"+rot_codigo+
+		String sql = "INSERT INTO rota (rot_codigo,aer_icao_origem,aer_icao_destino,rot_frequencia) VALUES ('"+rot_codigo+
 				"','"+aer_icao_origem+"','"+aer_icao_destino+"','"+rot_frequencia+"');";
 		Connect();
 		try {
@@ -165,7 +165,7 @@ public class BdConnector {
 	}	
 
 	static void insere_habilitacoes(int pil_hab_cpf, String pil_hab_habilitacao) {
-		String sql = "INSERT INTO piloto (pil_hab_cpf,pil_hab_habilitacao) VALUES ('"+pil_hab_cpf+
+		String sql = "INSERT INTO piloto_habilitacoes (pil_hab_cpf,pil_hab_habilitacao) VALUES ('"+pil_hab_cpf+
 				"','"+pil_hab_habilitacao+"');";
 		Connect();
 		try {
@@ -196,7 +196,7 @@ public class BdConnector {
 	}
 
 	static void insere_tecnico(int pes_cpf, String tec_anac, String tec_tipo_contrato) {
-		String sql = "INSERT INTO piloto (pes_cpf,tec_anac,tec_tipo_contrato) VALUES ('"+pes_cpf+
+		String sql = "INSERT INTO tecnico_manutencao (pes_cpf,tec_anac,tec_tipo_contrato) VALUES ('"+pes_cpf+
 				"','"+tec_anac+"','"+tec_tipo_contrato+"');";
 		Connect();
 		try {
@@ -229,7 +229,7 @@ public class BdConnector {
 	}	
 
 	static void insere_aeronave(int avi_serial_number, String avi_matricula, String avi_modelo, String avi_categoria, int avi_capacidade) {
-		String sql = "INSERT INTO piloto (avi_serial_number,avi_matricula,avi_modelo,avi_categoria,avi_capacidade) VALUES ('"+avi_serial_number+
+		String sql = "INSERT INTO aeronave (avi_serial_number,avi_matricula,avi_modelo,avi_categoria,avi_capacidade) VALUES ('"+avi_serial_number+
 				"','"+avi_matricula+"','"+avi_modelo+"','"+avi_categoria+"','"+avi_capacidade+"');";
 		Connect();
 		try {
@@ -263,7 +263,7 @@ public class BdConnector {
 	}	
 
 	static void insere_bagagem(int bag_numero, int bag_peso, int pes_cpf) {
-		String sql = "INSERT INTO piloto (bag_numero,bag_peso,pes_cpf) VALUES ('"+bag_numero+
+		String sql = "INSERT INTO bagagem (bag_numero,bag_peso,pes_cpf) VALUES ('"+bag_numero+
 				"','"+bag_peso+"','"+pes_cpf+"');";
 		Connect();
 		try {
@@ -327,40 +327,7 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}	
-
-	static void insere_comissario(int pes_cpf, String com_cht) {
-		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
-				"','"+com_cht+"');";
-		Connect();
-		try {
-			Statement stm = con.createStatement();
-			stm.executeUpdate(sql);
-		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
-		}
-		CloseConnection();
-	}
- 
-	static void lista_comissario() {
-		String sql = "SELECT * FROM comissario";
-		Connect();
-				
-		System.out.println("com_cht - pes_cpf");
-		try {
-			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
-			while(consulta.next()) {
-				int cpf = consulta.getInt("pes_cpf");
-				String com_cht = consulta.getString("com_cht");
-				System.out.println(com_cht+" - "+cpf);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CloseConnection();
-	}	
-}
+	
 public static void insere_pessoa(int pes_cpf, String pes_nome,char pes_sexo,date pes_bday,String pes_mail,String pes_rua,int pes_numero,String pes_bairro,String pes_complemento,
 	boolean pes_flag_cliente, boolean pes_flag_empregado, int pes_cod_func, String pes_tipo_func, String pes_passaporte, String pes_necessidades_especiais) {
 		String sql = "INSERT INTO pessoa (pes_cpf, pes_nome, pes_sexo, pes_bday, pes_mail, pes_rua, pes_numero, pes_bairro, pes_complemento, pes_flag_cliente, pes_flag_empregado, 
