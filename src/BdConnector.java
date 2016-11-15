@@ -9,6 +9,9 @@
  * @author Marcos
  */
 import java.sql.Statement;
+
+import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -20,12 +23,11 @@ public class BdConnector {
                     user = "postgres",
                     password = "123456";
    static Connection con;
-    BdConnector() {
-        
+    BdConnector() { 
     }
     
     
-    public int Connect() {
+    public static int Connect() {
         try {
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(url, user, password);
@@ -39,7 +41,7 @@ public class BdConnector {
         return 0;
     }
     
-    public int CloseConnection() {
+    public static int CloseConnection() {
          try {
             if (!con.isClosed()) con.close();
             System.out.println("ConexÃ£o com o banco de dados fechada.");
@@ -50,12 +52,45 @@ public class BdConnector {
          return 0;
     }
     
-/*            MÃ©todos para cadastro de dados                                                                                                                    */
+/*            Métodos para cadastro de dados                                                                                                                    */
     
-    public void insertClient() {
+    public static void insertClient() {
         
     }
     
+    
+    public static void insereComissario(int pes_cpf, String com_cht) {
+		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
+				"','"+com_cht+"');";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores");
+		}
+		CloseConnection();
+	}
+ 
+	static void listaComissario() {
+		String sql = "SELECT * FROM comissario";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			ResultSet consulta = stm.executeQuery(sql);
+			while(consulta.next()) {
+				int cpf = consulta.getInt("pes_cpf");
+				String com_cht = consulta.getString("com_cht");
+				System.out.println(com_cht+" - "+cpf);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CloseConnection();
+	}
+	
+	
     public static void Search(String dbl) {
         try {
             Statement stm = con.createStatement();

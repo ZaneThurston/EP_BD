@@ -488,13 +488,13 @@ public class PanelCadFuncionario extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				SalvarDados(Cargo.getSelectedItem().toString());
+				SalvarDados(Cargo.getSelectedItem().toString(), conectorBD);
 			}
 		});
         
     }
     
-    public void SalvarDados(String cargo) {
+    public void SalvarDados(String cargo, BdConnector conector) {
     	
     }
     
