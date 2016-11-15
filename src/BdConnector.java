@@ -68,7 +68,7 @@ public class BdConnector {
      * 
      * 
      */
-    public static void insereComissario(int pes_cpf, String com_cht) {
+    public static void insere_comissario(int pes_cpf, String com_cht) {
 		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
 				"','"+com_cht+"');";
 		Connect();
@@ -81,7 +81,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void listaComissario() {
+	static void lista_comissario() {
 		String sql = "SELECT * FROM comissario";
 		Connect();
 		try {
@@ -98,7 +98,7 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}
-    static void insereComissario_linguas(int com_lin_cpf, String com_lin_lingua) {
+    static void insere_comissario_linguas(int com_lin_cpf, String com_lin_lingua) {
 		String sql = "INSERT INTO piloto (com_lin_cpf,com_lin_lingua) VALUES ('"+com_lin_cpf+
 				"','"+com_lin_lingua+"');";
 		Connect();
@@ -111,7 +111,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void lista() {
+	static void lista_comissario_linguas() {
 		String sql = "SELECT * FROM comissario_linguas";
 		Connect();
 				
@@ -143,7 +143,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void lista() {
+	static void lista_rota() {
 		String sql = "SELECT * FROM rota";
 		Connect();		
 		try {
@@ -162,7 +162,7 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
-	static void inserecomissario(int pes_cpf, String com_cht) {
+	static void insere_comissario(int pes_cpf, String com_cht) {
 		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
 				"','"+com_cht+"');";
 		Connect();
@@ -175,7 +175,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void lista() {
+	static void lista_comissario() {
 		String sql = "SELECT * FROM comissario";
 		Connect();
 				
@@ -195,7 +195,7 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
-	static void insereHabilitacoes(int pil_hab_cpf, String pil_hab_habilitacao) {
+	static void insere_habilitacoes(int pil_hab_cpf, String pil_hab_habilitacao) {
 		String sql = "INSERT INTO piloto (pil_hab_cpf,pil_hab_habilitacao) VALUES ('"+pil_hab_cpf+
 				"','"+pil_hab_habilitacao+"');";
 		Connect();
@@ -208,7 +208,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void lista() {
+	static void lista_habilitacoes() {
 		String sql = "SELECT * FROM piloto_habilitacoes";
 		Connect();
 		try {
@@ -226,7 +226,7 @@ public class BdConnector {
 		CloseConnection();
 	}
 
-	static void insereTecnico(int pes_cpf, String tec_anac, String tec_tipo_contrato) {
+	static void insere_tecnico(int pes_cpf, String tec_anac, String tec_tipo_contrato) {
 		String sql = "INSERT INTO piloto (pes_cpf,tec_anac,tec_tipo_contrato) VALUES ('"+pes_cpf+
 				"','"+tec_anac+"','"+tec_tipo_contrato+"');";
 		Connect();
@@ -239,7 +239,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void lista() {
+	static void lista_tecnico() {
 		String sql = "SELECT * FROM tecnico_manutencao";
 		Connect();
 				
@@ -259,7 +259,7 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
-	static void insere_Aeronave(int avi_serial_number, String avi_matricula, String avi_modelo, String avi_categoria, int avi_capacidade) {
+	static void insere_aeronave(int avi_serial_number, String avi_matricula, String avi_modelo, String avi_categoria, int avi_capacidade) {
 		String sql = "INSERT INTO piloto (avi_serial_number,avi_matricula,avi_modelo,avi_categoria,avi_capacidade) VALUES ('"+avi_serial_number+
 				"','"+avi_matricula+"','"+avi_modelo+"','"+avi_categoria+"','"+avi_capacidade+"');";
 		Connect();
@@ -271,7 +271,7 @@ public class BdConnector {
 		}
 	}
  
-	static void lista() {
+	static void lista_aeronave() {
 		String sql = "SELECT * FROM aeronave";
 		Connect();
 				
@@ -293,7 +293,7 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
-	static void insereBagagem(int bag_numero, int bag_peso, int pes_cpf) {
+	static void insere_bagagem(int bag_numero, int bag_peso, int pes_cpf) {
 		String sql = "INSERT INTO piloto (bag_numero,bag_peso,pes_cpf) VALUES ('"+bag_numero+
 				"','"+bag_peso+"','"+pes_cpf+"');";
 		Connect();
@@ -307,7 +307,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void lista() {
+	static void lista_bagagem() {
 		String sql = "SELECT * FROM bagagem";
 		Connect();
 				
@@ -327,7 +327,7 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
-	static void inserepiloto(int pes_cpf, String pil_breve, int pil_horas_voo) {
+	static void insere_piloto(int pes_cpf, String pil_breve, int pil_horas_voo) {
 		String sql = "INSERT INTO piloto (pes_cpf,pil_breve,pil_horas_voo) VALUES ('"+pes_cpf+
 				"','"+pil_breve+"','"+pil_horas_voo+"');";
 		Connect();
@@ -340,7 +340,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void listapiloto() {
+	static void lista_piloto() {
 		String sql = "SELECT * FROM piloto";
 		Connect();
 				
@@ -360,7 +360,7 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
-	static void inserecomissario(int pes_cpf, String com_cht) {
+	static void insere_comissario(int pes_cpf, String com_cht) {
 		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
 				"','"+com_cht+"');";
 		Connect();
@@ -373,7 +373,7 @@ public class BdConnector {
 		CloseConnection();
 	}
  
-	static void lista() {
+	static void lista_comissario() {
 		String sql = "SELECT * FROM comissario";
 		Connect();
 				
