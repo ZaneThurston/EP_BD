@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -495,7 +496,11 @@ public class PanelCadFuncionario extends JPanel {
     }
     
     public void SalvarDados(String cargo, BdConnector conector) {
-    	
+    	try {
+    		
+    	} catch (SQLException e) {
+    		JOptionPane.showMessageDialog(null, "Erro ao salvar os dados.");
+    	}
     }
     
     
