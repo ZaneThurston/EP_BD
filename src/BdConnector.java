@@ -99,6 +99,41 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}
+	static void insere_voo(int voo_id, date voo_data, char voo_horario_saida, char voo_horario_chegada, int avi_serial_number, int rot_codigo, int  pes_cpf) {
+		String sql = "INSERT INTO voo (voo_id,voo_data,voo_horario_saida,voo_horario_chegada) VALUES ('"+voo_id+
+				"','"+voo_data+"','"+voo_horario_saida+"','"+voo_horario_chegada+"','"+avi_serial_number+"','"+rot_codigo+"','"+pes_cpf+"');";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
+		}
+		CloseConnection();
+	}
+ 
+	static void lista_voo() {
+		String sql = "SELECT * FROM voo";
+		Connect();	
+		try {
+			Statement stm = con.createStatement();
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				int avi_serial_number, int rot_codigo, int  pes_cpf
+				int id = consulta.getInt("voo_id");
+				String  data = consulta.getString("voo_data");
+				String  saida = consulta.getString("voo_horario_saida");
+				String  chegada = consulta.getString("voo_horario_chegada");
+				int serial_number = consulta.getInt("avi_serial_number");
+				int codigo = consulta.getInt("rot_codigo");
+				int cpf = consulta.getInt("pes_cpf");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CloseConnection();
+	}	
 
 	static void insere_rota(int rot_codigo, String aer_icao_origem, String aer_icao_destino, String rot_frequencia) {
 		String sql = "INSERT INTO rota (rot_codigo,aer_icao_origem,aer_icao_destino,rot_frequencia) VALUES ('"+rot_codigo+
@@ -125,6 +160,34 @@ public class BdConnector {
 				String  destino = consulta.getString("aer_icao_destino");
 				String  frequencia = consulta.getSring("rot_frequencia");
 			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CloseConnection();
+	}	
+	static void insere_manutencao(int man_codigo , String man_nome, String man_desricao) {
+		String sql = "INSERT INTO manutencao(man_codigo ,man_nome,man_descricao,pas_classe) VALUES ('"+man_codigo +"','"+man_nome+"','"+man_desricao+"');";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
+		}
+		CloseConnection();
+	}
+ 
+	static void lista_manutencao() {
+		String sql = "SELECT * FROM manutencao";
+		Connect();				
+		try {
+			Statement stm = con.createStatement();
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				String  codigo = consulta.getString("man_codigo ");
+				String  nome = consulta.getString("man_nome");
+				String  descricao= consulta.getString("man_descricao");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
