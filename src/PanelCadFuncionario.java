@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
@@ -108,22 +109,7 @@ public class PanelCadFuncionario extends JPanel {
     	HorasVoo.setValue(null);
     }
     
-    public void configCampos(int atrib) {
-    	switch (atrib) {
-    	case 0:
-    		
-    		break;
-    	case 1:
-    		break;
-    	case 2:
-    		break;
-    	case 3:
-    		break;
-    	default:
-    		break;
-    	}
-    }
-    
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
 	public PanelCadFuncionario(UserInterface window, BdConnector conectorBD, InitialPanel init) {
         lblNome = new JLabel("Nome completo: ");
@@ -495,7 +481,11 @@ public class PanelCadFuncionario extends JPanel {
     }
     
     public void SalvarDados(String cargo, BdConnector conector) {
-    	
+    	/*try {
+    		
+    	} catch (SQLException e) {
+    		JOptionPane.showMessageDialog(null, "Erro ao salvar os dados.");
+    	}*/
     }
     
     

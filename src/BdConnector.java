@@ -44,9 +44,9 @@ public class BdConnector {
     public static int CloseConnection() {
          try {
             if (!con.isClosed()) con.close();
-            System.out.println("ConexÃ£o com o banco de dados fechada.");
+            System.out.println("Conex�o com o banco de dados fechada.");
          } catch (SQLException e) {
-             System.out.println("NÃ£o foi possÃ­vel fechar a conexÃ£o com o banco de dados.");
+             System.out.println("N�o foi poss�vel fechar a conex�o com o banco de dados.");
              return 1;
          }
          return 0;
@@ -151,7 +151,7 @@ public class BdConnector {
 		Connect();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int cpf = consulta.getInt("tec_cpf");
 				int man_codigo = consulta.getInt("man_codigo");
@@ -185,7 +185,7 @@ public class BdConnector {
 		Connect();		
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int codigo = consulta.getInt("rot_codigo");
 				String  origem = consulta.getString("aer_icao_origem");
