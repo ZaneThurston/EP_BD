@@ -116,6 +116,13 @@ public class PanelCadCli extends JPanel {
         });
 
         jButtonSave.setText("Salvar");
+        jButtonSave.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				salvarDados();
+			}
+		});
         
         jButtonClean.setText("Limpar Campos");
         jButtonClean.addActionListener(new ActionListener() {
@@ -263,5 +270,23 @@ public class PanelCadCli extends JPanel {
                 .addContainerGap())
         );
     }                        
-
+    
+    void salvarDados(BdConnector conector) {
+    	
+    	conector.insere_pessoa(,
+    							pes_nome,
+    							pes_sexo,
+    							pes_bday,
+    							pes_mail,
+    							pes_rua,
+    							pes_numero,
+    							pes_bairro,
+    							pes_complemento,
+    							pes_flag_cliente,
+    							pes_flag_empregado,
+    							pes_cod_func,
+    							pes_tipo_func,
+    							pes_passaporte,
+    							pes_necessidades_especiais);
+    }
 }
