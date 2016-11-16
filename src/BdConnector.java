@@ -526,14 +526,16 @@ public class BdConnector {
 		String sql = "INSERT INTO pessoa"
 				+" (pes_cpf, pes_nome, pes_sexo, pes_bday, pes_mail, pes_rua, pes_numero, pes_bairro, pes_complemento, pes_flag_cliente, pes_flag_empregado," 
 				+" pes_cod_func, pes_tipo_func, pes_passaporte, pes_necessidades_especiais)"
-				+" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				+" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // não importa que tenha os '?', eles serão substituidos ao setar os campos no preparedStatement
 		Connect();
 		try {
-			PreparedStatement stm = con.prepareStatement(sql);
-			stm.setInt(1, pes_cpf);
-			stm.setString(2, pes_nome);
-			stm.setString(3, Character.toString(pes_sexo));
-			stm.setDate(4, pes_bday);
+			
+			// PreparedStatement, uma forma mais "bonita" pra executar uma query
+			PreparedStatement stm = con.prepareStatement(sql); // prepara o statement com uma string generalizada do comando SQL
+			stm.setInt(1, pes_cpf); 						// índice de parâmetros começa no 1, passa o cpf como int
+			stm.setString(2, pes_nome);						// 2, passa o nome como String
+			stm.setString(3, Character.toString(pes_sexo));	// 3, passa o sexo como String (conversão pra char fica a cargo da API)
+			stm.setDate(4, pes_bday);						// 4, etc.
 			stm.setString(5, pes_mail);
 			stm.setString(6, pes_rua);
 			stm.setInt(7, pes_numero);
@@ -546,7 +548,7 @@ public class BdConnector {
 			stm.setString(14, pes_passaporte);
 			stm.setString(15, pes_necessidades_especiais);
 			
-			stm.executeUpdate();
+			stm.executeUpdate();	// executa o comando, não precisa passar a string como parâmetro pois já foi passada antes
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
