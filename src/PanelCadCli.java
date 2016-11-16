@@ -1,6 +1,8 @@
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,7 +26,7 @@ import javax.swing.text.DefaultFormatterFactory;
  */
 @SuppressWarnings("serial")
 public class PanelCadCli extends JPanel {
-    JLabel lblNome,
+    static JLabel lblNome,
               lblCPF,
               lblEndereco,
               lblNiver,
@@ -38,7 +40,7 @@ public class PanelCadCli extends JPanel {
               lblSpclNecess,
               lblPersoData;
     
-    JTextField Nome,
+    static JTextField Nome,
                     Email,
                     Rua,
                     Numero,
@@ -46,18 +48,18 @@ public class PanelCadCli extends JPanel {
                     Compl,
                     Passaport;
     
-    JFormattedTextField CPF,
+    static JFormattedTextField CPF,
                                   Niver;
 
     @SuppressWarnings("rawtypes")
-	JComboBox Sexo,
+	static JComboBox Sexo,
                        SpclNecess;
 
-    JSeparator jSeparator1,
+    static JSeparator jSeparator1,
                     jSeparator2;
 
     
-    JButton jButtonVoltar,
+    static JButton jButtonVoltar,
                 jButtonSave,
                 jButtonClean;
     
@@ -120,7 +122,7 @@ public class PanelCadCli extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				salvarDados();
+				salvarDados(conectorBD);
 			}
 		});
         
@@ -271,22 +273,22 @@ public class PanelCadCli extends JPanel {
         );
     }                        
     
-    void salvarDados(BdConnector conector) {
-    	
-    	conector.insere_pessoa(,
-    							pes_nome,
-    							pes_sexo,
-    							pes_bday,
-    							pes_mail,
-    							pes_rua,
-    							pes_numero,
-    							pes_bairro,
-    							pes_complemento,
-    							pes_flag_cliente,
-    							pes_flag_empregado,
-    							pes_cod_func,
-    							pes_tipo_func,
-    							pes_passaporte,
-    							pes_necessidades_especiais);
+    static void salvarDados(BdConnector conector) {
+    	String nascDate = Niver.getText();
+    	BdConnector.insere_pessoa(Integer.parseInt(CPF.getText()),
+    							Nome.getText(),
+    							Sexo.getSelectedItem().toString().charAt(0),
+    							new Date(Integer.parseInt(nascDate.substring(0, 1)), Integer.parseInt(nascDate.substring(3, 4)), Integer.parseInt(nascDate.substring(6, 9))),
+    							Email.getText(),
+    							Rua.getText(),
+    							Integer.parseInt(Numero.getText()),
+    							Bairro.getText(),
+    							Compl.getText(),
+    							true,
+    							false,
+    							0,
+    							"",
+    							Passaport.getText(),
+    							SpclNecess.getSelectedItem().toString());
     }
 }
