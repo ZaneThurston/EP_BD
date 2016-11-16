@@ -44,9 +44,9 @@ public class BdConnector {
     public static int CloseConnection() {
          try {
             if (!con.isClosed()) con.close();
-            System.out.println("Conexï¿½o com o banco de dados fechada.");
+            System.out.println("Conexão com o banco de dados fechada.");
          } catch (SQLException e) {
-             System.out.println("Nï¿½o foi possï¿½vel fechar a conexï¿½o com o banco de dados.");
+             System.out.println("Não foi possível fechar a conexão com o banco de dados.");
              return 1;
          }
          return 0;
@@ -190,7 +190,7 @@ public class BdConnector {
 				int codigo = consulta.getInt("rot_codigo");
 				String  origem = consulta.getString("aer_icao_origem");
 				String  destino = consulta.getString("aer_icao_destino");
-				String  frequencia = consulta.getSring("rot_frequencia");
+				String  frequencia = consulta.getString("rot_frequencia");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -328,6 +328,7 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
+<<<<<<< HEAD
 	static void insere_comissario(int pes_cpf, String com_cht) {
 		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
 				"','"+com_cht+"');";
@@ -358,6 +359,9 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}	
+=======
+
+>>>>>>> refs/remotes/origin/master
 
 	static void insere_habilitacoes(int pil_hab_cpf, String pil_hab_habilitacao) {
 		String sql = "INSERT INTO piloto_habilitacoes (pil_hab_cpf,pil_hab_habilitacao) VALUES ('"+pil_hab_cpf+
@@ -377,7 +381,7 @@ public class BdConnector {
 		Connect();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int cpf = consulta.getInt("pil_hab_cpf");
 				String habilitacao = consulta.getString("pil_hab_habilitacao");
@@ -408,7 +412,7 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int cpf = consulta.getInt("pes_cpf");
 				String anac = consulta.getString("tec_anac");
@@ -439,13 +443,17 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
+<<<<<<< HEAD
 				int numero= consulta.getInt("avi_serial_number");
 				int  matricula= consulta.getString("avi_matricula");
 				int  modelo = consulta.getString("avi_modelo");
 				int  categoria = consulta.getSring("avi_categoria");
 				int  capacidade = consulta.getInt("avi_capacidade");
+=======
+
+>>>>>>> refs/remotes/origin/master
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -473,11 +481,15 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int numero= consulta.getInt("bag_numero");
 				int  peso = consulta.getInt("bag_peso");
 				int  cpf = consulta.getInt("pes_cpf");
+<<<<<<< HEAD
+=======
+				System.out.println(cpf+" - "+peso+" - ");
+>>>>>>> refs/remotes/origin/master
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -505,11 +517,15 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int cpf = consulta.getInt("pes_cpf");
 				String breve = consulta.getString("pil_breve");
 				int horas = consulta.getInt("pil_horas_voo");
+<<<<<<< HEAD
+=======
+				System.out.println("pilbreve - "+breve+" - "+horas);
+>>>>>>> refs/remotes/origin/master
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -517,6 +533,7 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}	
+<<<<<<< HEAD
 	
 public static void insere_pessoa(int pes_cpf, String pes_nome,char pes_sexo,date pes_bday,String pes_mail,String pes_rua,int pes_numero,String pes_bairro,String pes_complemento,
 	boolean pes_flag_cliente, boolean pes_flag_empregado, int pes_cod_func, String pes_tipo_func, String pes_passaporte, String pes_necessidades_especiais) {
@@ -562,6 +579,11 @@ public static void insere_pessoa(int pes_cpf, String pes_nome,char pes_sexo,date
 		}
 		CloseConnection();
 	}
+=======
+
+
+
+>>>>>>> refs/remotes/origin/master
   public static void Search(String dbl) {
         try {
             Statement stm = con.createStatement();
@@ -571,3 +593,4 @@ public static void insere_pessoa(int pes_cpf, String pes_nome,char pes_sexo,date
             
         }
     }
+}
