@@ -91,7 +91,6 @@ public class BdConnector {
 			while(consulta.next()) {
 				int cpf = consulta.getInt("com_lin_cpf");
 				String lingua = consulta.getString("com_lin_lingua");
-				System.out.println(cpf+" - "+lingua+" - ");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -199,6 +198,37 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}	
+	create table aeroporto_portoes(
+    aer_icao char(4) not null,
+    aer_por_portao char(2) not null, 
+    
+    static void insere_aeroporto_portoes(String  aer_icao, String aer_por_portao) {
+		String sql = "INSERT INTO aeroporto_portoes (aer_icao,aer_por_portao,pas_classe) VALUES ('"+aer_icao+"','"+aer_por_portao+"');";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
+		}
+		CloseConnection();
+	}
+ 
+	static void lista_aeroporto_portoes() {
+		String sql = "SELECT * FROM aeroporto_portoes";
+		Connect();			
+		try {
+			Statement stm = con.createStatement();
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				String  icao = consulta.getString("aer_icao");
+				String  por_portao = consulta.getString("aer_por_portao");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CloseConnection();
+	}	
 	static void insere_manutencao(int man_codigo , String man_nome, String man_desricao) {
 		String sql = "INSERT INTO manutencao(man_codigo ,man_nome,man_descricao,pas_classe) VALUES ('"+man_codigo +"','"+man_nome+"','"+man_desricao+"');";
 		Connect();
@@ -253,8 +283,6 @@ public class BdConnector {
 				int voo_id = consulta.getInt("voo_id");
 				String classe = consulta.getString("pas_classe");
 				date data_compra = consulta.getDate("pas_data_compra");
-
-				System.out.println(pas_fileira+" - "+cpf);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -323,7 +351,6 @@ public class BdConnector {
 			while(consulta.next()) {
 				int cpf = consulta.getInt("pes_cpf");
 				String com_cht = consulta.getString("com_cht");
-				System.out.println(com_cht+" - "+cpf);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -354,7 +381,6 @@ public class BdConnector {
 			while(consulta.next()) {
 				int cpf = consulta.getInt("pil_hab_cpf");
 				String habilitacao = consulta.getString("pil_hab_habilitacao");
-				System.out.println(cpf+" - "+habilitacao+" - ");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -387,7 +413,6 @@ public class BdConnector {
 				int cpf = consulta.getInt("pes_cpf");
 				String anac = consulta.getString("tec_anac");
 				String tipo_contrato = consulta.getString("tec_tipo_contrato");
-				System.out.println(cpf+" - "+anac+" - "+tipo_contrato);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -421,7 +446,6 @@ public class BdConnector {
 				int  modelo = consulta.getString("avi_modelo");
 				int  categoria = consulta.getSring("avi_categoria");
 				int  capacidade = consulta.getInt("avi_capacidade");
-				System.out.println(cpf+" - "+lingua+" - ");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -454,7 +478,6 @@ public class BdConnector {
 				int numero= consulta.getInt("bag_numero");
 				int  peso = consulta.getInt("bag_peso");
 				int  cpf = consulta.getInt("pes_cpf");
-				System.out.println(cpf+" - "+lingua+" - ");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -487,7 +510,6 @@ public class BdConnector {
 				int cpf = consulta.getInt("pes_cpf");
 				String breve = consulta.getString("pil_breve");
 				int horas = consulta.getInt("pil_horas_voo");
-				System.out.println(pil_breve+" - "+breve+" - "+horas);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
