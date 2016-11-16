@@ -133,7 +133,40 @@ public class BdConnector {
 			e.printStackTrace();
 		}
 		CloseConnection();
-	}	
+	}
+	public static void insere_reparo(int tec_cpf, String man_codigo, int avi_serial_number, date rep_date, float rep_orcamento) {
+		String sql = "INSERT INTO reparo (tec_cpf,man_codigo) VALUES ('"+tec_cpf+
+				"','"+man_codigo+"','"+avi_serial_number+"','"+rep_date+"','"+rep_orcamento+"');";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
+		}
+		CloseConnection();
+	}
+ 
+	static void lista_reparo() {
+		String sql = "SELECT * FROM reparo";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				int cpf = consulta.getInt("tec_cpf");
+				int man_codigo = consulta.getInt("man_codigo");
+				int serial_number = consulta.getInt("avi_serial_number");
+				date data = consulta.getDate("man_data");
+				float orcamento = consulta.getFloat("rep_orcamento");
+
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CloseConnection();
+	}
 
 	static void insere_rota(int rot_codigo, String aer_icao_origem, String aer_icao_destino, String rot_frequencia) {
 		String sql = "INSERT INTO rota (rot_codigo,aer_icao_origem,aer_icao_destino,rot_frequencia) VALUES ('"+rot_codigo+
