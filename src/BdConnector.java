@@ -226,7 +226,44 @@ public class BdConnector {
 			e.printStackTrace();
 		}
 		CloseConnection();
-	}	
+	}
+		
+	    public static void insere_passagem(String pas_coluna, String pas_fileira,int voo_id,String pas_classe,date pas_data_compra) {
+		String sql = "INSERT INTO passagem (pas_coluna,pas_fileira) VALUES ('"+pas_coluna+"','"+pas_fileira+"',
+			'"+voo_id+"','"+pas_classe+"','"+pas_data_compra+"','"+pas_coluna+"');";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			stm.executeUpdate(sql);
+		} catch (SQLException e) {
+			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
+		}
+		CloseConnection();
+	}
+ 
+	static void lista_passagem() {
+		String sql = "SELECT * FROM passagem";
+		Connect();
+		try {
+			Statement stm = con.createStatement();
+			ResultSet consulta = con.executeQuery(sql);
+			while(consulta.next()) {
+				String coluna= consulta.getInt("pas_coluna");
+				String pas_fileira = consulta.getString("pas_fileira");
+				int voo_id = consulta.getInt("voo_id");
+				String classe = consulta.getString("pas_classe");
+				date data_compra = consulta.getDate("pas_data_compra");
+
+				System.out.println(pas_fileira+" - "+cpf);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		CloseConnection();
+	}
+
+
 	static void insere_aeroporto(String aer_icao, String aer_nome, String aer_cidade, String aer_estado, boolean aer_oficina, int aer_hub, String aer_park) {
 		String sql = "INSERT INTO aeroporto (aer_icao,aer_nome,aer_cidade,aer_estado,aer_oficina,aer_hub,aer_park) VALUES ('"+aer_icao+
 				"','"+aer_nome+"','"+aer_cidade+"','"+aer_estado+"','"+aer_oficina+"','"+aer_hub+"','"+aer_park+"');";
