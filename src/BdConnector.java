@@ -44,9 +44,9 @@ public class BdConnector {
     public static int CloseConnection() {
          try {
             if (!con.isClosed()) con.close();
-            System.out.println("ConexÃ£o com o banco de dados fechada.");
+            System.out.println("Conex�o com o banco de dados fechada.");
          } catch (SQLException e) {
-             System.out.println("NÃ£o foi possÃ­vel fechar a conexÃ£o com o banco de dados.");
+             System.out.println("N�o foi poss�vel fechar a conex�o com o banco de dados.");
              return 1;
          }
          return 0;
@@ -117,7 +117,7 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int cpf = consulta.getInt("com_lin_cpf");
 				String lingua = consulta.getString("com_lin_lingua");
@@ -148,12 +148,12 @@ public class BdConnector {
 		Connect();		
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int codigo = consulta.getInt("rot_codigo");
 				String  origem = consulta.getString("aer_icao_origem");
 				String  destino = consulta.getString("aer_icao_destino");
-				String  frequencia = consulta.getSring("rot_frequencia");
+				String  frequencia = consulta.getString("rot_frequencia");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -162,38 +162,7 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
-	static void insere_comissario(int pes_cpf, String com_cht) {
-		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
-				"','"+com_cht+"');";
-		Connect();
-		try {
-			Statement stm = con.createStatement();
-			stm.executeUpdate(sql);
-		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
-		}
-		CloseConnection();
-	}
- 
-	static void lista_comissario() {
-		String sql = "SELECT * FROM comissario";
-		Connect();
-				
-		System.out.println("com_cht - pes_cpf");
-		try {
-			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
-			while(consulta.next()) {
-				int cpf = consulta.getInt("pes_cpf");
-				String com_cht = consulta.getString("com_cht");
-				System.out.println(com_cht+" - "+cpf);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CloseConnection();
-	}	
+
 
 	static void insere_habilitacoes(int pil_hab_cpf, String pil_hab_habilitacao) {
 		String sql = "INSERT INTO piloto (pil_hab_cpf,pil_hab_habilitacao) VALUES ('"+pil_hab_cpf+
@@ -213,7 +182,7 @@ public class BdConnector {
 		Connect();
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int cpf = consulta.getInt("pil_hab_cpf");
 				String habilitacao = consulta.getString("pil_hab_habilitacao");
@@ -245,7 +214,7 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int cpf = consulta.getInt("pes_cpf");
 				String anac = consulta.getString("tec_anac");
@@ -277,14 +246,9 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
-				int numero= consulta.getInt("avi_serial_number");
-				int  matricula= consulta.getString("avi_matricula");
-				int  modelo = consulta.getString("avi_modelo");
-				int  categoria = consulta.getSring("avi_categoria");
-				int  capacidade = consulta.getInt("avi_capacidade");
-				System.out.println(cpf+" - "+lingua+" - ");
+
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -299,7 +263,6 @@ public class BdConnector {
 		Connect();
 		try {
 			Statement stm = con.createStatement();
-			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
@@ -313,12 +276,12 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int numero= consulta.getInt("bag_numero");
 				int  peso = consulta.getInt("bag_peso");
 				int  cpf = consulta.getInt("pes_cpf");
-				System.out.println(cpf+" - "+lingua+" - ");
+				System.out.println(cpf+" - "+peso+" - ");
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -346,12 +309,12 @@ public class BdConnector {
 				
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
+			ResultSet consulta = stm.executeQuery(sql);
 			while(consulta.next()) {
 				int cpf = consulta.getInt("pes_cpf");
 				String breve = consulta.getString("pil_breve");
 				int horas = consulta.getInt("pil_horas_voo");
-				System.out.println(pil_breve+" - "+breve+" - "+horas);
+				System.out.println("pilbreve - "+breve+" - "+horas);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -360,39 +323,8 @@ public class BdConnector {
 		CloseConnection();
 	}	
 
-	static void insere_comissario(int pes_cpf, String com_cht) {
-		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
-				"','"+com_cht+"');";
-		Connect();
-		try {
-			Statement stm = con.createStatement();
-			stm.executeUpdate(sql);
-		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "Não foi possível salvar os valores"); //mostra uma caixa de diálogo
-		}
-		CloseConnection();
-	}
- 
-	static void lista_comissario() {
-		String sql = "SELECT * FROM comissario";
-		Connect();
-				
-		System.out.println("com_cht - pes_cpf");
-		try {
-			Statement stm = con.createStatement();
-			ResultSet consulta = con.executeQuery(sql);
-			while(consulta.next()) {
-				int cpf = consulta.getInt("pes_cpf");
-				String com_cht = consulta.getString("com_cht");
-				System.out.println(com_cht+" - "+cpf);
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		CloseConnection();
-	}	
-}
+
+
   public static void Search(String dbl) {
         try {
             Statement stm = con.createStatement();
@@ -402,3 +334,4 @@ public class BdConnector {
             
         }
     }
+}
