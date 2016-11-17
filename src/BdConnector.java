@@ -9,6 +9,7 @@
  * @author Marcos
  */
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 import javax.xml.transform.OutputKeys;
@@ -75,7 +76,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -92,7 +93,7 @@ public class BdConnector {
 				String lingua = consulta.getString("com_lin_lingua");
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -118,7 +119,7 @@ public class BdConnector {
 			stm.setInt(7, pes_cpf);
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -140,7 +141,7 @@ public class BdConnector {
 				int cpf = consulta.getInt("pes_cpf");
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -153,7 +154,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -172,7 +173,7 @@ public class BdConnector {
 				float orcamento = consulta.getFloat("rep_orcamento");
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -185,7 +186,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -204,7 +205,7 @@ public class BdConnector {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}	
@@ -216,7 +217,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -232,7 +233,7 @@ public class BdConnector {
 				String  por_portao = consulta.getString("aer_por_portao");
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}	
@@ -243,7 +244,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -261,7 +262,7 @@ public class BdConnector {
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -273,7 +274,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -292,7 +293,7 @@ public class BdConnector {
 				Date data_compra = consulta.getDate("pas_data_compra");
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -306,7 +307,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -328,7 +329,7 @@ public class BdConnector {
 
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}	
@@ -342,7 +343,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -358,7 +359,7 @@ public class BdConnector {
 				String com_cht = consulta.getString("com_cht");
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}	
@@ -371,7 +372,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -387,7 +388,7 @@ public class BdConnector {
 				String habilitacao = consulta.getString("pil_hab_habilitacao");
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -400,7 +401,7 @@ public class BdConnector {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
-			JOptionPane.showInternalMessageDialog(null, "N√£o foi poss√≠vel salvar os valores"); //mostra uma caixa de di√°logo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}
@@ -418,21 +419,25 @@ public class BdConnector {
 				String tipo_contrato = consulta.getString("tec_tipo_contrato");
 			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
 	}	
 
 	static void insere_aeronave(int avi_serial_number, String avi_matricula, String avi_modelo, String avi_categoria, int avi_capacidade) {
-		String sql = "INSERT INTO aeronave (avi_serial_number,avi_matricula,avi_modelo,avi_categoria,avi_capacidade) VALUES ('"+avi_serial_number+
-				"','"+avi_matricula+"','"+avi_modelo+"','"+avi_categoria+"','"+avi_capacidade+"');";
+		String sql1 = "INSERT INTO aeronave (avi_serial_number,avi_matricula,avi_modelo,avi_categoria) VALUES (?, ?, ?, ?);";
 		Connect();
 		try {
-			Statement stm = con.createStatement();
-			stm.executeUpdate(sql);
+			PreparedStatement stm = con.prepareStatement(sql1);
+			stm.setInt(1, avi_serial_number);
+			stm.setString(2, avi_matricula);
+			stm.setString(3, avi_modelo);
+			stm.setString(4, avi_categoria);
+			stm.executeUpdate();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
+		CloseConnection();
 	}
  
 	static void lista_aeronave() {
@@ -598,4 +603,32 @@ public class BdConnector {
 		CloseConnection();
 	}
 
+	
+// -------------------------- CONSULTAS -----------------------------------------------------
+/*	CÛdigo padr„o
+ * 	String sql = "";
+	try {
+		PreparedStatement stm = con.prepareStatement(sql);
+		ResultSet res = stm.executeQuery();
+	} catch (SQLException e) {
+		JOptionPane.showMessageDialog(null, "Erro", "Dados nao encontrados.", JOptionPane.OK_OPTION);
+	}
+*/
+	
+	static ArrayList<Object> listaFuncionarios() {
+		ArrayList<Object> results = new ArrayList<Object>();
+		String sql = "SELECT COUNT(*) FROM pessoa WHERE pes_flag_empregado=true";
+		try {
+			PreparedStatement stm = con.prepareStatement(sql);
+			ResultSet res = stm.executeQuery();
+			while (res.next()) {
+				results.add(res);
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Erro", "Dados nao encontrados.", JOptionPane.OK_OPTION);
+		}
+		return results;
+	}
+	
+	
 }

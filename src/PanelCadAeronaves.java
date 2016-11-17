@@ -159,7 +159,7 @@ public class PanelCadAeronaves extends JPanel {
         jButtonSave.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//conectorBD.insereAeronave();
+				//BdConnector.insereAeronave();
 				
 			}
 		});
@@ -171,6 +171,12 @@ public class PanelCadAeronaves extends JPanel {
     	Modelo.setText("");	
     }
     
-    
+    static void salvaCampos() {
+    	BdConnector.insere_aeronave(Integer.parseInt(NumSerie.getText()),
+    								Matricula.getText(),
+    								Modelo.getText(),
+    								catBox.getSelectedItem().toString(),
+    								avi_capacidade);
+    }
     
 }
