@@ -32,17 +32,19 @@ public class PanelCadAeronaves extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JButton jButtonVoltar,
+	static JButton jButtonVoltar,
                 jButtonSave,
                 jButtonClean;
     PanelCadAeronaves thisPanel = this;
-    private JLabel lblCadAero;
-    private JLabel lblNmeroDeSrie;
-    private JFormattedTextField NumSerie;
-    private JLabel lblMatrculaCaracteres;
-    private JTextField Matricula;
-    private JLabel lblModelo;
-    private JTextField Modelo;
+    static private JLabel lblCadAero,
+    					  lblNmeroDeSrie,
+    					  lblMatrculaCaracteres,
+    					  lblModelo,
+    					  lblCat;
+    static private JFormattedTextField NumSerie;
+    static private JTextField Matricula,
+    						  Modelo;
+    static private JComboBox catBox;
     
     public PanelCadAeronaves(UserInterface window, BdConnector conectorBD, InitialPanel init) {
 
@@ -86,9 +88,9 @@ public class PanelCadAeronaves extends JPanel {
         Modelo = new JTextField();
         Modelo.setColumns(10);
         
-        JLabel lblCat = new JLabel("Categoria:");
+        lblCat = new JLabel("Categoria:");
         
-        JComboBox catBox = new JComboBox();
+        catBox = new JComboBox();
         catBox.setModel(new DefaultComboBoxModel(new String[] {"Medium", "Heavy"}));
         catBox.setMaximumSize(new Dimension(150, 20));
         catBox.setFont(new Font("Dialog", Font.BOLD, 11));
@@ -163,11 +165,10 @@ public class PanelCadAeronaves extends JPanel {
 		});
     }
     
-    public void limpaCampos() {
+    static void limpaCampos() {
     	NumSerie.setValue(null);
        	Matricula.setText("");
-    	Modelo.setText("");
-    	
+    	Modelo.setText("");	
     }
     
     

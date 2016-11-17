@@ -487,7 +487,7 @@ public class PanelCadFuncionario extends JPanel {
 		BdConnector.insere_pessoa(Integer.parseInt(CPF.getText()),
 				Nome.getText(),
 				Sexo.getSelectedItem().toString().charAt(0),
-				new Date(Integer.parseInt(Niver.getText().substring(0, 1)), Integer.parseInt(Niver.getText().substring(3, 4)), Integer.parseInt(Niver.getText().substring(6, 9))),
+				new Date(Integer.parseInt(Niver.getText().substring(6, 9)), Integer.parseInt(Niver.getText().substring(3, 4)), Integer.parseInt(Niver.getText().substring(0, 1))),
 				Email.getText(),
 				Rua.getText(),
 				Integer.parseInt(Numero.getText()),

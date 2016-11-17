@@ -278,7 +278,7 @@ public class PanelCadCli extends JPanel {
     	BdConnector.insere_pessoa(Integer.parseInt(CPF.getText()),
     							Nome.getText(),
     							Sexo.getSelectedItem().toString().charAt(0),
-    							new Date(Integer.parseInt(nascDate.substring(0, 1)), Integer.parseInt(nascDate.substring(3, 4)), Integer.parseInt(nascDate.substring(6, 9))),
+    							new Date(Integer.parseInt(nascDate.substring(6, 9)), Integer.parseInt(nascDate.substring(3, 4)), Integer.parseInt(nascDate.substring(0, 1))),
     							Email.getText(),
     							Rua.getText(),
     							Integer.parseInt(Numero.getText()),
