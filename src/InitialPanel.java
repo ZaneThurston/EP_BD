@@ -59,7 +59,7 @@ public class InitialPanel extends JPanel{
         CadFunc.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PanelCadFuncionario panelFunc = new PanelCadFuncionario(window, conector, thisPanel);
+                PanelCadFuncionario panelFunc = new PanelCadFuncionario(window, thisPanel);
                 window.atualiza(thisPanel, panelFunc);
             }
          });

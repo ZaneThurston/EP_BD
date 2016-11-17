@@ -21,6 +21,7 @@ import javax.swing.JTextField;
  *
  * @author Marcos
  */
+@SuppressWarnings("serial")
 public class PanelCadVoos extends JPanel {
     static JButton jButtonVoltar,
                 jButtonSave,
@@ -205,7 +206,7 @@ public class PanelCadVoos extends JPanel {
     }
     
     static void salvaCampos(BdConnector conector) {
-    	
-    	conector.insere_voo(voo_id, voo_data, voo_horario_saida, voo_horario_chegada, avi_serial_number, rot_codigo, pes_cpf);
+
+    	//conector.insere_voo(voo_id, voo_data, voo_horario_saida, voo_horario_chegada, avi_serial_number, rot_codigo, pes_cpf);
     }
 }

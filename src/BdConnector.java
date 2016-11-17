@@ -98,9 +98,10 @@ public class BdConnector {
 	}
 	
 	// WIP
+	// Impasse: cadastrar voo usando o código de rota ou fazer uma busca com base na origem e destino inseridos pelo usuário?
 	static void insere_voo(Date voo_data, String voo_horario_saida, String voo_horario_chegada, int avi_serial_number, int rot_codigo, int  pes_cpf) {
 		int id;
-		String sql = "INSERT INTO voo (voo_id,voo_data,voo_horario_saida,voo_horario_chegada) VALUES (?, ?, ?, ?, ?, ?, ?);",
+		String sql = "INSERT INTO voo (voo_id, voo_data, voo_horario_saida, voo_horario_chegada, avi_serial_number, rot_codigo, pes_cpf) VALUES (?, ?, ?, ?, ?, ?, ?);",
 			   pk = "SELECT COUNT(*) FROM voo";
 		Connect();
 		try {
@@ -110,7 +111,11 @@ public class BdConnector {
 			id = newpk.getInt(1);
 			stm.setInt(1, id+1);
 			stm.setDate(2, voo_data);
-			stm.setString(3, Character.toString(voo_horario_saida));
+			stm.setString(3, voo_horario_saida);
+			stm.setString(4, voo_horario_chegada);
+			stm.setInt(5, avi_serial_number);
+			stm.setInt(6, rot_codigo);
+			stm.setInt(7, pes_cpf);
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo

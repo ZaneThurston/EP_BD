@@ -3,6 +3,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Date;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -33,7 +34,7 @@ import java.awt.Font;
  */
 @SuppressWarnings("serial")
 public class PanelCadFuncionario extends JPanel {
-    JLabel lblNome,
+    static private JLabel lblNome,
               lblCPF,
               lblEndereco,
               lblNiver,
@@ -47,7 +48,7 @@ public class PanelCadFuncionario extends JPanel {
               lblSpclNecess,
               lblPersoData;
     
-    JTextField Nome,
+    static private JTextField Nome,
                     Email,
                     Rua,
                     Numero,
@@ -55,41 +56,43 @@ public class PanelCadFuncionario extends JPanel {
                     Compl,
                     Passaport;
     
-    JFormattedTextField CPF,
-                        Niver;
+    static private JFormattedTextField CPF,
+                        Niver,
+                        CodFunc;
 
     @SuppressWarnings("rawtypes")
-	JComboBox Sexo,
+	static private JComboBox Sexo,
               SpclNecess;
 
-    JSeparator jSeparator2,
+    static private JSeparator jSeparator2,
                     jSeparator3;
 
     
-    JButton jButtonVoltar,
+    static private JButton jButtonVoltar,
                 jButtonSave,
                 jButtonClean;
     
     PanelCadFuncionario thisPanel = this;
-    private JLabel lblCargo;
-    private JLabel lblPiloto;
-    private JLabel lblNmAnac;
-    private JLabel lblHabAeronaves;
-    private JLabel lblHorasDeVoo;
-    private JFormattedTextField ANAC;
-    private JTextField HabAeronavs;
-    private JFormattedTextField HorasVoo;
-    private JLabel lblComissrio;
-    private JLabel lblTcnicoDeManuteno;
-    private JLabel lblChtCom;
-    private JLabel lblIdiomas;
-    private JTextField ChtCom;
-    private JTextField Idiomas;
-    private JLabel lblChtTec;
-    private JTextField ChtTec;
-    private JLabel lblTipoDeContrato;
+    static private JLabel lblCargo,
+    					  lblPiloto,
+    					  lblNmAnac,
+    					  lblHabAeronaves,
+    					  lblHorasDeVoo,
+    					  lblComissrio,
+    					  lblTcnicoDeManuteno,
+    					  lblChtCom,
+    					  lblIdiomas,
+    					  lblChtTec,
+    					  lblTipoDeContrato;
+    static private JFormattedTextField ANAC;
+    static private JTextField HabAeronavs;
+    static private JFormattedTextField HorasVoo;
+    static private JTextField ChtCom,
+    						  Idiomas,
+    						  ChtTec;
     @SuppressWarnings("rawtypes")
-	private JComboBox Contrato;
+	static private JComboBox Contrato,
+                             Cargo;
     
     public void LimpaCampos() {
     	Nome.setText("");
@@ -111,7 +114,7 @@ public class PanelCadFuncionario extends JPanel {
     
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public PanelCadFuncionario(UserInterface window, BdConnector conectorBD, InitialPanel init) {
+	public PanelCadFuncionario(UserInterface window, InitialPanel init) {
         lblNome = new JLabel("Nome completo: ");
         lblCPF = new JLabel("CPF: ");
         lblEndereco = new JLabel("Endereço ");
@@ -165,6 +168,13 @@ public class PanelCadFuncionario extends JPanel {
         });
 
         jButtonSave.setText("Salvar");
+        jButtonSave.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				SalvarDados(Cargo.getSelectedItem().toString());
+			}
+		});
         
         jButtonClean.setText("Limpar Campos");
         jButtonClean.addActionListener(new ActionListener() {
@@ -182,14 +192,14 @@ public class PanelCadFuncionario extends JPanel {
         lblEmpresa.setFont(new Font("Tahoma", Font.PLAIN, 12));
         
         lblCargo = new JLabel("Cargo:");
+        Cargo = new JComboBox();
         
-        JComboBox Cargo = new JComboBox();
-        Cargo.setModel(new DefaultComboBoxModel(new String[] {"Interno", "Piloto", "Comiss\u00E1rio", "Mec\u00E2nico"}));
+        Cargo.setModel(new DefaultComboBoxModel(new String[] {"Interno", "Piloto", "Comissario", "Mecanico"}));
   
         
         JLabel lblNmFuncionrio = new JLabel("N\u00FAm Funcion\u00E1rio:");
         
-        JFormattedTextField CodFunc = new JFormattedTextField();
+        CodFunc = new JFormattedTextField();
         CodFunc.setFormatterFactory(new DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         
         lblPiloto = new JLabel("Piloto");
@@ -470,22 +480,40 @@ public class PanelCadFuncionario extends JPanel {
         );
         this.setLayout(layout);
         
-        jButtonSave.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				SalvarDados(Cargo.getSelectedItem().toString(), conectorBD);
-			}
-		});
         
     }
     
-    public void SalvarDados(String cargo, BdConnector conector) {
-    	/*try {
-    		
-    	} catch (SQLException e) {
-    		JOptionPane.showMessageDialog(null, "Erro ao salvar os dados.");
-    	}*/
+    static void SalvarDados(String cargo) {
+		BdConnector.insere_pessoa(Integer.parseInt(CPF.getText()),
+				Nome.getText(),
+				Sexo.getSelectedItem().toString().charAt(0),
+				new Date(Integer.parseInt(Niver.getText().substring(0, 1)), Integer.parseInt(Niver.getText().substring(3, 4)), Integer.parseInt(Niver.getText().substring(6, 9))),
+				Email.getText(),
+				Rua.getText(),
+				Integer.parseInt(Numero.getText()),
+				Bairro.getText(),
+				Compl.getText(),
+				true,
+				true,
+				Integer.parseInt(CodFunc.getText()),
+				cargo,
+				Passaport.getText(),
+				SpclNecess.getSelectedItem().toString());
+    	
+		switch (cargo) {
+    	case "Piloto":
+    		BdConnector.insere_piloto(Integer.parseInt(CPF.getText()), ANAC.getText(), Integer.parseInt(HorasVoo.getText()));
+    		break;
+    	case "Comissario":
+    		BdConnector.insere_comissario(Integer.parseInt(CPF.getText()), ChtCom.getText());
+    		BdConnector.insere_comissario_linguas(Integer.parseInt(CPF.getText()), Idiomas.getText());
+    		break;
+    	case "Mecanico":
+    		BdConnector.insere_tecnico(Integer.parseInt(CPF.getText()), ChtTec.getText(), Contrato.getSelectedItem().toString());
+    		break;
+    	default:
+    		break;	
+    	}
     }
     
     
