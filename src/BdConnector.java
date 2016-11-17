@@ -96,12 +96,21 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}
-	static void insere_voo(int voo_id, Date voo_data, char voo_horario_saida, char voo_horario_chegada, int avi_serial_number, int rot_codigo, int  pes_cpf) {
-		String sql = "INSERT INTO voo (voo_id,voo_data,voo_horario_saida,voo_horario_chegada) VALUES ('"+voo_id+
-				"','"+voo_data+"','"+voo_horario_saida+"','"+voo_horario_chegada+"','"+avi_serial_number+"','"+rot_codigo+"','"+pes_cpf+"');";
+	
+	// WIP
+	static void insere_voo(Date voo_data, String voo_horario_saida, String voo_horario_chegada, int avi_serial_number, int rot_codigo, int  pes_cpf) {
+		int id;
+		String sql = "INSERT INTO voo (voo_id,voo_data,voo_horario_saida,voo_horario_chegada) VALUES (?, ?, ?, ?, ?, ?, ?);",
+			   pk = "SELECT COUNT(*) FROM voo";
 		Connect();
 		try {
-			Statement stm = con.createStatement();
+			Statement cont = con.createStatement();
+			PreparedStatement stm = con.prepareStatement(sql);
+			ResultSet newpk = cont.executeQuery(pk);
+			id = newpk.getInt(1);
+			stm.setInt(1, id+1);
+			stm.setDate(2, voo_data);
+			stm.setString(3, Character.toString(voo_horario_saida));
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo

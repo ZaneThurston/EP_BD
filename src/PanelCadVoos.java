@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -21,17 +22,17 @@ import javax.swing.JTextField;
  * @author Marcos
  */
 public class PanelCadVoos extends JPanel {
-    JButton jButtonVoltar,
+    static JButton jButtonVoltar,
                 jButtonSave,
                 jButtonClean;
     PanelCadVoos thisPanel = this;
-    private JLabel lblVoos;
-    private JLabel lblData;
-    private JTextField timeDepart;
-    private JTextField timeArr;
-    private JTextField pilotCPF;
-    private JTextField Orig;
-    private JTextField Dest;
+    static private JLabel lblVoos;
+    static private JLabel lblData;
+    static private JTextField timeDepart;
+    static private JTextField timeArr;
+    static private JTextField pilotCPF;
+    static private JTextField Orig;
+    static private JTextField Dest;
     
     public PanelCadVoos(UserInterface window, BdConnector conectorBD, InitialPanel init) {
 
@@ -48,6 +49,13 @@ public class PanelCadVoos extends JPanel {
         });
 
         jButtonSave.setText("Salvar");
+        jButtonSave.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				salvaCampos(conectorBD);
+			}
+		});
 
         jButtonClean.setText("Limpar Campos");
         jButtonClean.addActionListener(new ActionListener() {
@@ -188,7 +196,16 @@ public class PanelCadVoos extends JPanel {
         this.setLayout(layout);
     }
     
-    public void limpaCampos() {
+    static void limpaCampos() {
+    	timeDepart.setText("");
+    	timeArr.setText("");
+    	pilotCPF.setText("");
+    	Orig.setText("");
+    	Dest.setText("");
+    }
+    
+    static void salvaCampos(BdConnector conector) {
     	
+    	conector.insere_voo(voo_id, voo_data, voo_horario_saida, voo_horario_chegada, avi_serial_number, rot_codigo, pes_cpf);
     }
 }
