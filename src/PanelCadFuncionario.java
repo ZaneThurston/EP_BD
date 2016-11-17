@@ -503,6 +503,7 @@ public class PanelCadFuncionario extends JPanel {
 		switch (cargo) {
     	case "Piloto":
     		BdConnector.insere_piloto(Integer.parseInt(CPF.getText()), ANAC.getText(), Integer.parseInt(HorasVoo.getText()));
+    		BdConnector.insere_habilitacoes(Integer.parseInt(CPF.getText()), HabAeronavs.getText());
     		break;
     	case "Comissario":
     		BdConnector.insere_comissario(Integer.parseInt(CPF.getText()), ChtCom.getText());
