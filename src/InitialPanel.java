@@ -29,7 +29,10 @@ public class InitialPanel extends JPanel{
                 CadAeronaves,
                 CadAirports,
                 CadVoos,
-                CadRepairs;
+                CadRepairs,
+    			btnVoos,
+    			btnFrota,
+    			conFunc;
     InitialPanel thisPanel = this;
     private JLabel Cadastro;
     private JLabel lblConsultas;
@@ -102,9 +105,24 @@ public class InitialPanel extends JPanel{
         lblConsultas = new JLabel("Consultas");
         lblConsultas.setFont(new Font("Tahoma", Font.PLAIN, 13));
         
-        JButton btnVoos = new JButton("Voos");
+        btnVoos = new JButton("Voos");
         
-        JButton btnFrota = new JButton("Frota");
+        btnFrota = new JButton("Frota");
+        
+        conFunc = new JButton("Funcion\u00E1rios");
+        
+        // action listeners para os botos de consultas
+        
+        conFunc.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				panelConsFunc panelConFunc = new panelConsFunc(window, thisPanel);
+				window.atualiza(thisPanel, panelConFunc);
+			}
+		});
+        
+        
         GroupLayout groupLayout = new GroupLayout(this);
         groupLayout.setHorizontalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -126,6 +144,8 @@ public class InitialPanel extends JPanel{
         					.addComponent(CadRepairs))
         				.addComponent(lblConsultas)
         				.addGroup(groupLayout.createSequentialGroup()
+        					.addComponent(conFunc)
+        					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(btnVoos)
         					.addPreferredGap(ComponentPlacement.UNRELATED)
         					.addComponent(btnFrota)))
@@ -149,7 +169,8 @@ public class InitialPanel extends JPanel{
         			.addGap(18)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(btnVoos)
-        				.addComponent(btnFrota))
+        				.addComponent(btnFrota)
+        				.addComponent(conFunc))
         			.addContainerGap(120, Short.MAX_VALUE))
         );
         setLayout(groupLayout);

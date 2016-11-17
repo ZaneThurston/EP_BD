@@ -176,7 +176,7 @@ public class PanelCadAeronaves extends JPanel {
     								Matricula.getText(),
     								Modelo.getText(),
     								catBox.getSelectedItem().toString(),
-    								avi_capacidade);
+    								0);
     }
     
 }
