@@ -47,9 +47,12 @@ public class panelConsReparo extends JPanel {
 			}
 		});
 		
-		scrollPane = new JScrollPane();
-		
-		btnVoltar = new JButton("Voltar");
+		model = new DefaultTableModel();
+		table = new JTable(model);		
+		scrollPane = new JScrollPane(table);
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		criaTabela();
+		btnVoltar = new JButton("Voltar");	
 		btnVoltar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -59,8 +62,7 @@ public class panelConsReparo extends JPanel {
 			}
 		});
 		
-		model = new DefaultTableModel();
-		table = new JTable(model);
+		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -90,13 +92,13 @@ public class panelConsReparo extends JPanel {
 						.addComponent(numSerie, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnPesquisar))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnVoltar)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		setLayout(groupLayout);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		preencheTabela(-1);
 	}
 	
 	void criaTabela() {
@@ -106,10 +108,11 @@ public class panelConsReparo extends JPanel {
 		model.addColumn("Num. série Aeronave");
 		model.addColumn("Data");
 		model.addColumn("Valor (R$)");
-		table.getColumnModel().getColumn(1).setPreferredWidth(150);
-		table.getColumnModel().getColumn(2).setPreferredWidth(20);
-		table.getColumnModel().getColumn(3).setPreferredWidth(50);
-		table.getColumnModel().getColumn(12).setPreferredWidth(25);
+		table.getColumnModel().getColumn(0).setPreferredWidth(75);
+		table.getColumnModel().getColumn(1).setPreferredWidth(75);
+		table.getColumnModel().getColumn(2).setPreferredWidth(130);
+		table.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table.getColumnModel().getColumn(4).setPreferredWidth(130);
 	}
 
 	void preencheTabela(int serial) {
@@ -118,7 +121,7 @@ public class panelConsReparo extends JPanel {
 		lista1 = BdConnector.listaReparos(serial);
 		try{
 			while (lista1.next()) {
-				model.addRow(new Object[] {lista1.getLong(1), lista1.getString(2),lista1.getString(3), lista1.getString(4)});
+				model.addRow(new Object[] {lista1.getLong(1), lista1.getString(2),lista1.getLong(3), lista1.getString(4), lista1.getString(5)});
 			}
 			lista1.close();
 		} catch (SQLException e) {

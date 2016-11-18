@@ -1,7 +1,5 @@
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowStateListener;
+import javax.swing.JPanel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,6 +16,6 @@ public class Main {
     public static void main (String args[]) {
         UserInterface janela = new UserInterface();
         InitialPanel t = new InitialPanel(janela, conector);
-        janela.add(t);
+        janela.atualiza(new JPanel(), t);
     }
 }

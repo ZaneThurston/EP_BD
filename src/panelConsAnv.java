@@ -27,8 +27,9 @@ public class panelConsAnv extends JPanel {
 		
 		JLabel lblFrota = new JLabel("Frota");
 		lblFrota.setFont(new Font("Tahoma", Font.BOLD, 13));
-		table = new JTable();
+		
 		model = new DefaultTableModel();
+		table = new JTable(model);
 		scrollPane = new JScrollPane(table);
 		btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -39,7 +40,7 @@ public class panelConsAnv extends JPanel {
                 window.atualiza(thisPanel, ant);
 			}
 		});
-		
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(

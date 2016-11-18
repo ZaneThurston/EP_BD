@@ -670,11 +670,11 @@ public class BdConnector {
 	static ResultSet listaReparos(int serial) {
 		ResultSet res = null;
 		String sql = "SELECT * FROM reparo",
-			   sql2 = sql+ " WHERE avi_serial_number=?";
+			   sql2 = sql + " WHERE avi_serial_number=?";
 		Connect();
 		try {
 			PreparedStatement stm;
-			if (serial < 0) stm = con.prepareStatement(sql);
+			if (serial < 1) stm = con.prepareStatement(sql);
 			else {
 				stm = con.prepareStatement(sql2);
 				stm.setInt(1, serial);
