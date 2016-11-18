@@ -34,6 +34,8 @@ public class PanelCadVoos extends JPanel {
     static private JTextField pilotCPF;
     static private JTextField Orig;
     static private JTextField Dest;
+    static private JFormattedTextField aerSerial,
+    								   routeID;
     
     public PanelCadVoos(UserInterface window, BdConnector conectorBD, InitialPanel init) {
 
@@ -86,7 +88,7 @@ public class PanelCadVoos extends JPanel {
         
         JLabel lblNumAeronave = new JLabel("Num. aeronave:");
         
-        JFormattedTextField aerSerial = new JFormattedTextField();
+        aerSerial = new JFormattedTextField();
         
         JLabel lblCpfPiloto = new JLabel("CPF do piloto:");
         
@@ -95,7 +97,7 @@ public class PanelCadVoos extends JPanel {
         
         JLabel lblIdDaRota = new JLabel("ID da rota:");
         
-        JFormattedTextField routeID = new JFormattedTextField();
+        routeID = new JFormattedTextField();
         
         JLabel lblOrigem = new JLabel("Origem:");
         

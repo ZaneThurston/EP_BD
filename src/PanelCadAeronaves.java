@@ -41,10 +41,13 @@ public class PanelCadAeronaves extends JPanel {
     					  lblMatrculaCaracteres,
     					  lblModelo,
     					  lblCat;
-    static private JFormattedTextField NumSerie;
-    static private JTextField Matricula,
-    						  Modelo;
-    static private JComboBox catBox;
+    static private JFormattedTextField NumSerie,
+    								   Capac;
+    static private JTextField Matricula;
+    						  
+    @SuppressWarnings("rawtypes")
+	static private JComboBox catBox,
+							 Modelo;
     
     public PanelCadAeronaves(UserInterface window, BdConnector conectorBD, InitialPanel init) {
 
@@ -85,8 +88,8 @@ public class PanelCadAeronaves extends JPanel {
         
         lblModelo = new JLabel("Modelo");
         
-        Modelo = new JTextField();
-        Modelo.setColumns(10);
+        Modelo = new JComboBox();
+        
         
         lblCat = new JLabel("Categoria:");
         
@@ -94,6 +97,10 @@ public class PanelCadAeronaves extends JPanel {
         catBox.setModel(new DefaultComboBoxModel(new String[] {"Medium", "Heavy"}));
         catBox.setMaximumSize(new Dimension(150, 20));
         catBox.setFont(new Font("Dialog", Font.BOLD, 11));
+        
+        JLabel lblCapacidadeDePassageiros = new JLabel("Capacidade de passageiros:");
+        
+        Capac = new JFormattedTextField();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
@@ -103,7 +110,7 @@ public class PanelCadAeronaves extends JPanel {
         			.addGroup(layout.createParallelGroup(Alignment.LEADING)
         				.addGroup(layout.createSequentialGroup()
         					.addComponent(jButtonVoltar)
-        					.addPreferredGap(ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+        					.addPreferredGap(ComponentPlacement.RELATED, 362, Short.MAX_VALUE)
         					.addComponent(jButtonClean)
         					.addGap(18)
         					.addComponent(jButtonSave))
@@ -116,15 +123,20 @@ public class PanelCadAeronaves extends JPanel {
         					.addComponent(lblMatrculaCaracteres)
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(Matricula, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-        				.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
-        					.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        						.addComponent(lblCat)
-        						.addPreferredGap(ComponentPlacement.RELATED)
-        						.addComponent(catBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        					.addGroup(Alignment.LEADING, layout.createSequentialGroup()
-        						.addComponent(lblModelo)
-        						.addPreferredGap(ComponentPlacement.RELATED)
-        						.addComponent(Modelo, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE))))
+        				.addGroup(layout.createSequentialGroup()
+        					.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+        						.addGroup(layout.createSequentialGroup()
+        							.addComponent(lblCat)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(catBox, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        						.addGroup(layout.createSequentialGroup()
+        							.addComponent(lblModelo)
+        							.addPreferredGap(ComponentPlacement.RELATED)
+        							.addComponent(Modelo, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)))
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(lblCapacidadeDePassageiros)
+        					.addPreferredGap(ComponentPlacement.RELATED)
+        					.addComponent(Capac, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)))
         			.addContainerGap())
         );
         layout.setVerticalGroup(
@@ -143,12 +155,14 @@ public class PanelCadAeronaves extends JPanel {
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblModelo)
-        				.addComponent(Modelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+        				.addComponent(Modelo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+        				.addComponent(lblCapacidadeDePassageiros)
+        				.addComponent(Capac, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
         			.addPreferredGap(ComponentPlacement.UNRELATED)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(lblCat)
         				.addComponent(catBox, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
-        			.addPreferredGap(ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
+        			.addPreferredGap(ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
         			.addGroup(layout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(jButtonVoltar)
         				.addComponent(jButtonSave)
@@ -168,15 +182,14 @@ public class PanelCadAeronaves extends JPanel {
     static void limpaCampos() {
     	NumSerie.setValue(null);
        	Matricula.setText("");
-    	Modelo.setText("");	
+    		
     }
     
     static void salvaCampos() {
     	BdConnector.insere_aeronave(Integer.parseInt(NumSerie.getText()),
     								Matricula.getText(),
-    								Modelo.getText(),
+    								Modelo.getSelectedItem().toString(),
     								catBox.getSelectedItem().toString(),
-    								0);
+    								Integer.parseInt(Capac.getText()));
     }
-    
 }

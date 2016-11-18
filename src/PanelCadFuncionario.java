@@ -515,6 +515,7 @@ public class PanelCadFuncionario extends JPanel {
     	default:
     		break;	
     	}
+		
     }
     
     

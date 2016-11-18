@@ -615,7 +615,6 @@ public class BdConnector {
 		ResultSet results = null;
 		String sql = "SELECT * FROM pessoa WHERE pes_flag_empregado=true;",
 		       sql2 = sql.replace(';', ' ') + "AND pes_tipo_func=?;";
-		System.out.println(sql2);
 		Connect();
 		try {
 			
@@ -627,19 +626,18 @@ public class BdConnector {
 				break;
 			case "Comissario":
 				stm = con.prepareStatement(sql2);
-				stm.setString(1, "'Comissario'");
+				stm.setString(1, "Comissario");
 				break;
 			case "Mecanico":
 				stm = con.prepareStatement(sql2);
-				stm.setString(1, "'Mecanico'");
+				stm.setString(1, "Mecanico");
 				break;
 			case "Interno":
 				stm = con.prepareStatement(sql2);
-				stm.setString(1, "'Interno'");
+				stm.setString(1, "Interno");
 				break;
 			default:
 				stm = con.prepareStatement(sql);
-				System.out.println("chegou");
 				break;
 			}
 			results = stm.executeQuery();

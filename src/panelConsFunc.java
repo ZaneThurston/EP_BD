@@ -9,13 +9,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.JTableHeader;
 
 @SuppressWarnings("serial")
 public class panelConsFunc extends JPanel{
@@ -56,7 +54,7 @@ public class panelConsFunc extends JPanel{
 		voltar = new JButton("Voltar");
 		add(barraRol, "cell 0 1 2 1,grow");
 		add(voltar, "cell 0 2, alignx left");
-		
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		voltar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 thisPanel.setVisible(false);
