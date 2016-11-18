@@ -9,11 +9,7 @@
  * @author Marcos
  */
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-import javax.xml.transform.OutputKeys;
-
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -615,18 +611,42 @@ public class BdConnector {
 	}
 */
 	
-	static ArrayList<Object> listaFuncionarios() {
-		ArrayList<Object> results = new ArrayList<Object>();
-		String sql = "SELECT COUNT(*) FROM pessoa WHERE pes_flag_empregado=true";
+	static ResultSet listaFuncionarios(String param) {
+		ResultSet results = null;
+		String sql = "SELECT * FROM pessoa WHERE pes_flag_empregado=true;",
+		       sql2 = sql.replace(';', ' ') + "AND pes_tipo_func=?;";
+		System.out.println(sql2);
+		Connect();
 		try {
-			PreparedStatement stm = con.prepareStatement(sql);
-			ResultSet res = stm.executeQuery();
-			while (res.next()) {
-				results.add(res);
+			
+			PreparedStatement stm;
+			switch (param) {
+			case "Piloto":
+				stm = con.prepareStatement(sql2);
+				stm.setString(1, "Piloto");
+				break;
+			case "Comissario":
+				stm = con.prepareStatement(sql2);
+				stm.setString(1, "'Comissario'");
+				break;
+			case "Mecanico":
+				stm = con.prepareStatement(sql2);
+				stm.setString(1, "'Mecanico'");
+				break;
+			case "Interno":
+				stm = con.prepareStatement(sql2);
+				stm.setString(1, "'Interno'");
+				break;
+			default:
+				stm = con.prepareStatement(sql);
+				System.out.println("chegou");
+				break;
 			}
+			results = stm.executeQuery();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Erro", "Dados nao encontrados.", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Dados nao encontrados.", "Erro", JOptionPane.OK_OPTION);
 		}
+		CloseConnection();
 		return results;
 	}
 	
