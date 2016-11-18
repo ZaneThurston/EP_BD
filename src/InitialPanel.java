@@ -32,10 +32,12 @@ public class InitialPanel extends JPanel{
                 CadRepairs,
     			btnVoos,
     			btnFrota,
-    			conFunc;
+    			conFunc,
+    			ConReparos;
     InitialPanel thisPanel = this;
     private JLabel Cadastro;
     private JLabel lblConsultas;
+    
     
     // constroi o painel na janela da interface, inicializa componentes
     public InitialPanel(UserInterface window, BdConnector conector) {
@@ -105,6 +107,8 @@ public class InitialPanel extends JPanel{
         lblConsultas = new JLabel("Consultas");
         lblConsultas.setFont(new Font("Tahoma", Font.PLAIN, 13));
         
+     // action listeners para os botos de consultas
+        
         btnVoos = new JButton("Voos");
         
         btnFrota = new JButton("Frota");
@@ -116,10 +120,8 @@ public class InitialPanel extends JPanel{
 				window.atualiza(thisPanel, panelFrota);
 			}
 		});
+        
         conFunc = new JButton("Funcion\u00E1rios");
-        
-        // action listeners para os botos de consultas
-        
         conFunc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -129,6 +131,15 @@ public class InitialPanel extends JPanel{
 			}
 		});
         
+        ConReparos = new JButton("Reparos");
+        ConReparos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				panelConsReparo panelConReps = new panelConsReparo(window, thisPanel);
+				window.atualiza(thisPanel, panelConReps);
+			}
+		});
         
         GroupLayout groupLayout = new GroupLayout(this);
         groupLayout.setHorizontalGroup(
@@ -155,7 +166,9 @@ public class InitialPanel extends JPanel{
         					.addPreferredGap(ComponentPlacement.RELATED)
         					.addComponent(btnVoos)
         					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(btnFrota)))
+        					.addComponent(btnFrota)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(ConReparos)))
         			.addContainerGap(82, Short.MAX_VALUE))
         );
         groupLayout.setVerticalGroup(
@@ -177,7 +190,8 @@ public class InitialPanel extends JPanel{
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(btnVoos)
         				.addComponent(btnFrota)
-        				.addComponent(conFunc))
+        				.addComponent(conFunc)
+        				.addComponent(ConReparos))
         			.addContainerGap(120, Short.MAX_VALUE))
         );
         setLayout(groupLayout);

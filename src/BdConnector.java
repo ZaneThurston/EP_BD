@@ -667,6 +667,26 @@ public class BdConnector {
 		return fleet;
 	}
 	
+	static ResultSet listaReparos(int serial) {
+		ResultSet res = null;
+		String sql = "SELECT * FROM reparo",
+			   sql2 = sql+ " WHERE avi_serial_number=?";
+		Connect();
+		try {
+			PreparedStatement stm;
+			if (serial < 0) stm = con.prepareStatement(sql);
+			else {
+				stm = con.prepareStatement(sql2);
+				stm.setInt(1, serial);
+			}
+			res = stm.executeQuery();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+		}
+		CloseConnection();
+		return res;
+	}
+	
 	static List<Object> listaModelosAnv() {
 		List<Object> models = new LinkedList<Object>();
 		String sql = "SELECT * FROM aeronave_modelo";
