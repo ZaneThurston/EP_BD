@@ -78,7 +78,7 @@ public class InitialPanel extends JPanel{
         CadAeronaves.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PanelCadAeronaves panelAeronaves = new PanelCadAeronaves(window, conector, thisPanel);
+                PanelCadAeronaves panelAeronaves = new PanelCadAeronaves(window, thisPanel);
                 window.atualiza(thisPanel, panelAeronaves);
             }
         });
@@ -108,7 +108,14 @@ public class InitialPanel extends JPanel{
         btnVoos = new JButton("Voos");
         
         btnFrota = new JButton("Frota");
-        
+        btnFrota.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				panelConsAnv panelFrota = new panelConsAnv(window, thisPanel);
+				window.atualiza(thisPanel, panelFrota);
+			}
+		});
         conFunc = new JButton("Funcion\u00E1rios");
         
         // action listeners para os botos de consultas

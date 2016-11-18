@@ -9,6 +9,9 @@
  * @author Marcos
  */
 import java.sql.Statement;
+import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.Date;
@@ -603,12 +606,14 @@ public class BdConnector {
 // -------------------------- CONSULTAS -----------------------------------------------------
 /*	Código padrão
  * 	String sql = "";
+ * 	Connect();
 	try {
 		PreparedStatement stm = con.prepareStatement(sql);
 		ResultSet res = stm.executeQuery();
 	} catch (SQLException e) {
-		JOptionPane.showMessageDialog(null, "Erro", "Dados nao encontrados.", JOptionPane.OK_OPTION);
+		JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 	}
+	CloseConnection();
 */
 	
 	static ResultSet listaFuncionarios(String param) {
@@ -647,6 +652,34 @@ public class BdConnector {
 		CloseConnection();
 		return results;
 	}
+
+	static ResultSet listaFrota() {
+		ResultSet fleet = null;
+		String sql = "SELECT * FROM aeronave";
+		Connect();
+		try {
+			PreparedStatement stm = con.prepareStatement(sql);
+			fleet = stm.executeQuery();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+		}
+		CloseConnection();
+		return fleet;
+	}
 	
+	static List<Object> listaModelosAnv() {
+		List<Object> models = new LinkedList<Object>();
+		String sql = "SELECT * FROM aeronave_modelo";
+		Connect();
+		try {
+			PreparedStatement stm = con.prepareStatement(sql);
+			ResultSet res = stm.executeQuery();
+			while (res.next()) models.add(res);
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+		}
+		CloseConnection();
+		return models;
+	}
 	
 }
