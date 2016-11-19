@@ -77,3 +77,96 @@
 		CloseConnection();
 		return res;
 	}
+
+		static ResultSet Lista_total_passageiros() {
+			ResultSet res = null;
+			String sql = 	"select count(*) from passagem where voo_id=?";
+
+
+			Connect();
+			try {
+				PreparedStatement stm;
+					stm = con.prepareStatement(sql);
+					stm.setInt(1, voo_id);
+				    res = stm.executeQuery();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			}
+			CloseConnection();
+			return res;
+		}
+
+		
+
+		static ResultSet Lista_peso_bagagem_passageiro() {
+			ResultSet res = null;
+			String sql = 	"select sum(bagagem.bag_peso) from bagagem where pes_cpf= ?";
+
+			Connect();
+			try {
+				PreparedStatement stm;
+					stm = con.prepareStatement(sql);
+					stm.setInt(1, pes_cpf;
+				    res = stm.executeQuery();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			}
+			CloseConnection();
+			return res;
+		}
+
+
+		static ResultSet Lista_de_voos() {
+			ResultSet res = null;
+			String sql = 	"select * from voo where rot_codigo=?";
+
+
+			Connect();
+			try {
+				PreparedStatement stm;
+					stm = con.prepareStatement(sql);
+					stm.setInt(1, rot_codigo);
+				    res = stm.executeQuery();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			}
+			CloseConnection();
+			return res;
+		}
+
+		static ResultSet Lista_quantidade_de_voos() {
+			ResultSet res = null;
+			String sql = 	"select count(*) from voo where rot_codigo= ?";
+
+			Connect();
+			try {
+				PreparedStatement stm;
+					stm = con.prepareStatement(sql);
+					stm.setInt(1, rot_codigo);
+				    res = stm.executeQuery();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			}
+			CloseConnection();
+			return res;
+		}
+
+		static ResultSet Lista_total_passageiros_rota() {
+			ResultSet res = null;
+			String sql = 	"select count (*) from passagem" +
+			 				"where passagem.voo_id"; +
+			 				" in (select voo.voo_id from voo where rot_codigo= ?);"
+
+
+			Connect();
+			try {
+				PreparedStatement stm;
+					stm = con.prepareStatement(sql);
+					stm.setInt(1, rot_codigo);
+				    res = stm.executeQuery();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			}
+			CloseConnection();
+			return res;
+		}
