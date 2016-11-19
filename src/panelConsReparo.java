@@ -15,6 +15,7 @@ import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class panelConsReparo extends JPanel {
 	JLabel lblManutenoDaFrota,
@@ -26,6 +27,8 @@ public class panelConsReparo extends JPanel {
 	DefaultTableModel model;
 	JTable table;
 	panelConsReparo thisPanel = this;
+	private JLabel lblGastos;
+	private JTextField gastoTot;
 	
 	
 	public panelConsReparo(UserInterface window, JPanel ant) {
@@ -62,6 +65,12 @@ public class panelConsReparo extends JPanel {
 			}
 		});
 		
+		lblGastos = new JLabel("Gastos com manuten\u00E7\u00E3o da(s) aeronave(s) filtradas R$:");
+		
+		gastoTot = new JTextField();
+		gastoTot.setEditable(false);
+		gastoTot.setColumns(10);
+		
 		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -78,7 +87,12 @@ public class panelConsReparo extends JPanel {
 							.addComponent(numSerie, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
 							.addComponent(btnPesquisar))
-						.addComponent(btnVoltar))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(btnVoltar)
+							.addPreferredGap(ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+							.addComponent(lblGastos)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(gastoTot, GroupLayout.PREFERRED_SIZE, 134, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
@@ -92,9 +106,12 @@ public class panelConsReparo extends JPanel {
 						.addComponent(numSerie, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnPesquisar))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnVoltar)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnVoltar)
+						.addComponent(gastoTot, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblGastos))
 					.addContainerGap())
 		);
 		setLayout(groupLayout);
@@ -117,12 +134,15 @@ public class panelConsReparo extends JPanel {
 
 	void preencheTabela(int serial) {
 		ResultSet lista1;
+		//ResultSet gstos;
 		model.setNumRows(0);
 		lista1 = BdConnector.listaReparos(serial);
+		//gstos = BdConnector.Lista_total_rep_orcamento_oficina(serial);
 		try{
 			while (lista1.next()) {
 				model.addRow(new Object[] {lista1.getLong(1), lista1.getString(2),lista1.getLong(3), lista1.getString(4), lista1.getString(5)});
 			}
+			//gastoTot.setText(gstos.getString(1));
 			lista1.close();
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -695,6 +695,23 @@ public class BdConnector {
 		CloseConnection();
 		return res;
 	}
-	
+
+	static ResultSet Lista_total_rep_orcamento_oficina(int serial) {
+		ResultSet res = null;
+		String sql = 	"SELECT rep_orcamento FROM reparo WHERE avi_serial_number= ?"; 
+
+
+		Connect();
+		try {
+			PreparedStatement stm;
+				stm = con.prepareStatement(sql);
+				stm.setInt(1, serial);
+			    res = stm.executeQuery();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+		}
+		CloseConnection();
+		return res;
+	}
 	
 }
