@@ -5,6 +5,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.sql.Date;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -51,15 +53,31 @@ public class panelConsVoos extends JPanel {
 		
 		Data = new JFormattedTextField();
 		Data.setFormatterFactory(new DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-		
+		Data.addFocusListener(new FocusListener() {
+			
+			@Override
+			public void focusLost(FocusEvent e) {
+				// TODO Auto-generated method stub
+				System.out.println(Data.getText());
+				System.out.println(Integer.parseInt(Data.getText().substring(6, 9)) +" "+
+						Integer.parseInt(Data.getText().substring(6, 9))+" "+
+						Integer.parseInt(Data.getText().substring(6, 9)));
+			}
+			
+			@Override
+			public void focusGained(FocusEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				preencheTabela(Orig.getText(), Dest.getText(), new Date(Integer.parseInt(Data.getText().substring(6, 9)),
-																		Integer.parseInt(Data.getText().substring(6, 9)),
-																		Integer.parseInt(Data.getText().substring(6, 9))));
+				preencheTabela(Orig.getText(), Dest.getText(), new Date(Integer.parseInt(Data.getText().substring(6, 10)), 	//ano
+																		Integer.parseInt(Data.getText().substring(3, 5)), 	//mes
+																		Integer.parseInt(Data.getText().substring(0, 2)))); //dia
 			}
 		});
 		
@@ -144,9 +162,7 @@ public class panelConsVoos extends JPanel {
 		table.getColumnModel().getColumn(4).setPreferredWidth(100);
 		table.getColumnModel().getColumn(5).setPreferredWidth(80);
 		table.getColumnModel().getColumn(6).setPreferredWidth(100);
-		System.out.println(Integer.parseInt(Data.getText().substring(6, 9)) +" "+
-						Integer.parseInt(Data.getText().substring(6, 9))+" "+
-						Integer.parseInt(Data.getText().substring(6, 9)));
+		
 	}
 	
 	void preencheTabela(String orig, String dest, Date data) {

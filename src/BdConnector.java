@@ -34,10 +34,6 @@ public class BdConnector {
         try {
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(url, user, password);
-            System.out.println("Conectado com o banco de dados.");
-            Statement stm = con.createStatement();
-            //stm.executeUpdate(string script) ÃƒÂ© usado para inserir valores
-            //stm.executeQuery() ÃƒÂ© usado para pesquisa
         } catch (ClassNotFoundException | SQLException e) {
             return 1;
         }
@@ -47,7 +43,6 @@ public class BdConnector {
     public static int CloseConnection() {
          try {
             if (!con.isClosed()) con.close();
-            System.out.println("Conexão com o banco de dados fechada.");
          } catch (SQLException e) {
              System.out.println("Não foi possível fechar a conexão com o banco de dados.");
              return 1;
@@ -671,10 +666,7 @@ public class BdConnector {
 		Connect();	
 		try {
 			Statement stm = con.createStatement();
-			ResultSet consulta = stm.executeQuery(sql);
-			while(consulta.next()) {
-
-			}
+			list = stm.executeQuery(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
