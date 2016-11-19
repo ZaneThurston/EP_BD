@@ -22,7 +22,6 @@
 			CloseConnection();
 			return res;
 		}
-	}
 
 	static ResultSet Lista_vooComissario() {
 		ResultSet res = null;
@@ -44,5 +43,37 @@
 		CloseConnection();
 		return res;
 	}
-}
+		static ResultSet Lista passageiros_voo.java() {
+		ResultSet res = null;
+		String sql = "select passagem.pes_cpf, pessoa.pes_nome from passagem, pessoa"; + 
+					 "where passagem.voo_id=34 and" +
+					 "passagem.pes_cpf = pessoa.pes_cpf";
+		Connect();
+		try {
+			PreparedStatement stm;
+				stm = con.prepareStatement(sql);
+			    res = stm.executeQuery();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+		}
+		CloseConnection();
+		return res;
+	}
+
+	static ResultSet Lista peso_das_bagagens.java() {
+		ResultSet res = null;
+		String sql = "select sum(bagagem.bag_peso) from bagagem"; +
+		"where bagagem.pes_cpf"; +
+		"in (select passagem.pes_cpf from passagem where passagem.voo_id=?);" 
+		Connect();
+		try {
+			PreparedStatement stm;
+				stm = con.prepareStatement(sql);
+				stm.setInt(1, passagem.voo_id);
+			    res = stm.executeQuery();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+		}
+		CloseConnection();
+		return res;
 	}
