@@ -122,28 +122,6 @@ public class BdConnector {
 		}
 		CloseConnection();
 	}
- 
-	static void lista_voo() {
-		String sql = "SELECT * FROM voo";
-		Connect();	
-		try {
-			Statement stm = con.createStatement();
-			ResultSet consulta = stm.executeQuery(sql);
-			while(consulta.next()) {
-				int avi_serial_number, rot_codigo, pes_cpf;
-				int id = consulta.getInt("voo_id");
-				String  data = consulta.getString("voo_data");
-				String  saida = consulta.getString("voo_horario_saida");
-				String  chegada = consulta.getString("voo_horario_chegada");
-				int serial_number = consulta.getInt("avi_serial_number");
-				int codigo = consulta.getInt("rot_codigo");
-				int cpf = consulta.getInt("pes_cpf");
-			}
-		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
-		}
-		CloseConnection();
-	}
 	
 	public static void insere_reparo(int tec_cpf, String man_codigo, int avi_serial_number, Date rep_date, float rep_orcamento) {
 		String sql = "INSERT INTO reparo (tec_cpf,man_codigo) VALUES ('"+tec_cpf+
@@ -687,19 +665,22 @@ public class BdConnector {
 		return res;
 	}
 	
-	static List<Object> listaModelosAnv() {
-		List<Object> models = new LinkedList<Object>();
-		String sql = "SELECT * FROM aeronave_modelo";
-		Connect();
+	static ResultSet listaVoos(String orig, String dest, Date data) {
+		String sql = "SELECT * FROM voo";
+		ResultSet list = null;
+		Connect();	
 		try {
-			PreparedStatement stm = con.prepareStatement(sql);
-			ResultSet res = stm.executeQuery();
-			while (res.next()) models.add(res);
+			Statement stm = con.createStatement();
+			ResultSet consulta = stm.executeQuery(sql);
+			while(consulta.next()) {
+
+			}
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
 		CloseConnection();
-		return models;
+		return list;
 	}
+	
 	
 }

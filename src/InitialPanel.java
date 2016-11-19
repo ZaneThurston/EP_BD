@@ -30,7 +30,7 @@ public class InitialPanel extends JPanel{
                 CadAirports,
                 CadVoos,
                 CadRepairs,
-    			btnVoos,
+    			conVoos,
     			btnFrota,
     			conFunc,
     			ConReparos;
@@ -109,8 +109,17 @@ public class InitialPanel extends JPanel{
         
      // action listeners para os botos de consultas
         
-        btnVoos = new JButton("Voos");
+        conVoos = new JButton("Voos");
+        conVoos.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				panelConsVoos panelVoos = new panelConsVoos(window, thisPanel);
+				window.atualiza(thisPanel, panelVoos);
+			}
+		});
         
+   
         btnFrota = new JButton("Frota");
         btnFrota.addActionListener(new ActionListener() {
 			@Override
@@ -164,7 +173,7 @@ public class InitialPanel extends JPanel{
         				.addGroup(groupLayout.createSequentialGroup()
         					.addComponent(conFunc)
         					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(btnVoos)
+        					.addComponent(conVoos)
         					.addPreferredGap(ComponentPlacement.UNRELATED)
         					.addComponent(btnFrota)
         					.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -189,7 +198,7 @@ public class InitialPanel extends JPanel{
         			.addGap(18)
         			.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
         				.addComponent(conFunc)
-        				.addComponent(btnVoos)
+        				.addComponent(conVoos)
         				.addComponent(btnFrota)
         				.addComponent(ConReparos))
         			.addContainerGap(120, Short.MAX_VALUE))
