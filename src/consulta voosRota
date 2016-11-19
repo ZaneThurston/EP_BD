@@ -170,3 +170,21 @@
 			CloseConnection();
 			return res;
 		}
+	
+		static ResultSet Lista_total_rep_orcamento_oficina() {
+			ResultSet res = null;
+			String sql = 	"select rep_orcamento from reparo where avi_serial_number= ?"; 
+
+
+			Connect();
+			try {
+				PreparedStatement stm;
+					stm = con.prepareStatement(sql);
+					stm.setInt(1, avi_serial_number);
+				    res = stm.executeQuery();
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			}
+			CloseConnection();
+			return res;
+		}
