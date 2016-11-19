@@ -11,7 +11,7 @@
 			Connect();
 			try {
 				PreparedStatement stm;
-					stm = con.prepareStatement(sql5);
+					stm = con.prepareStatement(sql);
 					stm.setInt(1, destino);
 					stm.setInt(1, origem);
 					stm.setDate(1, data);
@@ -33,7 +33,7 @@
 		Connect();
 		try {
 			PreparedStatement stm;
-				stm = con.prepareStatement(sql4);
+				stm = con.prepareStatement(sql);
 				stm.setInt(1, com_cpf);
 				stm.setInt(2, voo_data_minima);
 				stm.setInt(3, voo_datamaxima;
