@@ -1,4 +1,4 @@
-		static ResultSet voosRota() {
+		static ResultSet Lista_voosRota() {
 			ResultSet res = null;
 			String sql = "SELECT * FROM rota, voo",
 				   sql1 = sql+  "WHERE rota.rot_codigo = voo.rot_codigo";
@@ -22,28 +22,25 @@
 		}
 	}
 
-		static ResultSet vooComissario() {
-			ResultSet res = null;
-			String sql = "SELECT * FROM rota, voo",
-				   sql1 = sql+  "WHERE rota.rot_codigo = voo.rot_codigo";
-				   sql2 = sql1+ "WHERE rota.aer_icao_destino = ?";
-				   sql3 = sql2+ "WHERE rota.aer_icao_origem = ?";
-				   sql4 = sql3+ "WHERE voo.voo_data = ?";
-				   sql5 = "SELECT pes_nome, voo_id FROM pessoa, voo WHERE pessoa.pes_cpf = sql4.pes_cpf"
-
-
-			Connect();
-			try {
-				PreparedStatement stm;
-					stm = con.prepareStatement(sql5);
-					stm.setInt(1, aer_icao_destino);
-					stm.setInt(2, aer_icao_origem);
-					stm.setDate(3, voo_data);
-				    res = stm.executeQuery();
-			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
-			}
-			CloseConnection();
-			return res;
+	static ResultSet Lista_vooComissario() {
+		ResultSet res = null;
+		String sql = "SELECT * FROM voo, voo_comissarios " +
+                  "where voo.voo_id = voo_comissarios.voo_id and " + 
+                  "voo_comissarios.com_cpf = ? and " +
+                  "voo.voo_data between ? and ?";
+		Connect();
+		try {
+			PreparedStatement stm;
+				stm = con.prepareStatement(sql4);
+				stm.setInt(1, com_cpf);
+				stm.setInt(2, voo_data_minima);
+				stm.setInt(3, voo_datamaxima;
+			    res = stm.executeQuery();
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
+		CloseConnection();
+		return res;
+	}
+}
 	}
