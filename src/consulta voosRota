@@ -1,6 +1,6 @@
 		
 		//consulta por origem, destino e data
-		static ResultSet Lista_voosRota() {
+		static ResultSet Lista_voosRota(int aer_icao_destino,int aer_icao_origem, Date voo_data) {
 			ResultSet res = null;
 			String sql = 	"SELECT pes_nome, voo_id FROM rota, voo, pessoa " +
 				   	"WHERE rota.rot_codigo = voo.rot_codigo and" +
@@ -26,7 +26,7 @@
 		}
 
 	//quais voos o comissario participou em um periodo de tempo
-	static ResultSet Lista_vooComissario() {
+	static ResultSet Lista_vooComissario(int com_cpf, date voo_data_minima, date voo_datamaxima) {
 		ResultSet res = null;
 		String sql = "SELECT * FROM voo, voo_comissarios " +
                   "where voo.voo_id = voo_comissarios.voo_id and " + 
@@ -37,8 +37,8 @@
 			PreparedStatement stm;
 				stm = con.prepareStatement(sql);
 				stm.setInt(1, com_cpf);
-				stm.setInt(2, voo_data_minima);
-				stm.setInt(3, voo_datamaxima;
+				stm.setDate(2, voo_data_minima);
+				stm.setDate(3, voo_datamaxima;
 			    res = stm.executeQuery();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
@@ -47,7 +47,7 @@
 		return res;
 	}
 		//lista de passageiros em determinado voo
-		static ResultSet Lista passageiros_voo.java() {
+		static ResultSet Lista passageiros_voo.java(int voo_id) {
 		ResultSet res = null;
 		String sql = "select passagem.pes_cpf, pessoa.pes_nome from passagem, pessoa"; + 
 					 "where passagem.voo_id=? and" +
@@ -66,7 +66,7 @@
 	}
 	
 	//Soma do peso das bagagens
-	static ResultSet Lista peso_das_bagagens.java() {
+	static ResultSet Lista peso_das_bagagens.java(int voo_id) {
 		ResultSet res = null;
 		String sql = "select sum(bagagem.bag_peso) from bagagem"; +
 		"where bagagem.pes_cpf"; +
@@ -84,7 +84,7 @@
 		return res;
 	}
 		//Número de passageiros em um voo.
-		static ResultSet Lista_total_passageiros() {
+		static ResultSet Lista_total_passageiros(int voo_id) {
 			ResultSet res = null;
 			String sql = 	"select count(*) from passagem where voo_id=?";
 
@@ -104,7 +104,7 @@
 
 		
 		//Peso total das bagagens de um determinado passageiro
-		static ResultSet Lista_peso_bagagem_passageiro() {
+		static ResultSet Lista_peso_bagagem_passageiro(int pes_cpf) {
 			ResultSet res = null;
 			String sql = 	"select sum(bagagem.bag_peso) from bagagem where pes_cpf= ?";
 
@@ -112,7 +112,7 @@
 			try {
 				PreparedStatement stm;
 					stm = con.prepareStatement(sql);
-					stm.setInt(1, pes_cpf;
+					stm.setInt(1, pes_cpf);
 				    res = stm.executeQuery();
 			} catch (SQLException e) {
 				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
@@ -122,7 +122,7 @@
 		}
 
 		//Lista com os voos de determinada rota
-		static ResultSet Lista_de_voos() {
+		static ResultSet Lista_de_voos(int rot_codigo) {
 			ResultSet res = null;
 			String sql = 	"select * from voo where rot_codigo=?";
 
@@ -141,7 +141,7 @@
 		}
 
 		//total de voos disponiveis em uma rota
-		static ResultSet Lista_quantidade_de_voos() {
+		static ResultSet Lista_quantidade_de_voos(int rot_codigo) {
 			ResultSet res = null;
 			String sql = 	"select count(*) from voo where rot_codigo= ?";
 
@@ -159,7 +159,7 @@
 		}
 
 		//Lista com o total de passageiros que pegaram algum voo na rota X.
-		static ResultSet Lista_total_passageiros_rota() {
+		static ResultSet Lista_total_passageiros_rota(int rot_codigo) {
 			ResultSet res = null;
 			String sql = 	"select count (*) from passagem" +
 			 				"where passagem.voo_id"; +
@@ -180,7 +180,7 @@
 		}
 	
 		//orçamentos das manutenções de uma aeronave específica
-		static ResultSet Lista_total_rep_orcamento_oficina() {
+		static ResultSet Lista_total_rep_orcamento_oficina(int avi_serial_number) {
 			ResultSet res = null;
 			String sql = 	"select rep_orcamento from reparo where avi_serial_number= ?"; 
 
