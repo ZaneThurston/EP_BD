@@ -134,16 +134,18 @@ public class panelConsReparo extends JPanel {
 
 	void preencheTabela(int serial) {
 		ResultSet lista1;
-		//ResultSet gstos;
+		ResultSet gstos;
 		model.setNumRows(0);
 		lista1 = BdConnector.listaReparos(serial);
-		//gstos = BdConnector.Lista_total_rep_orcamento_oficina(serial);
+		gstos = BdConnector.total_rep_orcamento_oficina(serial);
 		try{
 			while (lista1.next()) {
 				model.addRow(new Object[] {lista1.getLong(1), lista1.getString(2),lista1.getLong(3), lista1.getString(4), lista1.getString(5)});
 			}
-			//gastoTot.setText(gstos.getString(1));
+			gstos.next();
+			gastoTot.setText(gstos.getString(1));
 			lista1.close();
+			gstos.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

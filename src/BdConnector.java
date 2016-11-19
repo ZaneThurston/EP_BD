@@ -696,17 +696,18 @@ public class BdConnector {
 		return res;
 	}
 
-	static ResultSet Lista_total_rep_orcamento_oficina(int serial) {
+	static ResultSet total_rep_orcamento_oficina(int serial) {
 		ResultSet res = null;
-		String sql = 	"SELECT rep_orcamento FROM reparo WHERE avi_serial_number= ?"; 
-
-
+		String sql = 	"SELECT sum(rep_orcamento) FROM reparo",
+			   sql2 = sql + " WHERE avi_serial_number= ?"; 
 		Connect();
 		try {
 			PreparedStatement stm;
-				stm = con.prepareStatement(sql);
+			if (serial >0) {
+				stm = con.prepareStatement(sql2);
 				stm.setInt(1, serial);
-			    res = stm.executeQuery();
+			} else stm = con.prepareStatement(sql);
+			res = stm.executeQuery();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
