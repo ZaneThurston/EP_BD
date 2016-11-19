@@ -661,17 +661,39 @@ public class BdConnector {
 	}
 	
 	static ResultSet listaVoos(String orig, String dest, Date data) {
-		String sql = "SELECT * FROM voo";
-		ResultSet list = null;
-		Connect();	
+		ResultSet res = null;
+		String sql = "SELECT voo.voo_data, rota.aer_icao_origem, rota.aer_icao_destino, voo.voo_horario_saida, voo.voo_horario_chegada, aeronave.avi_matricula, pessoa.pes_nome "+
+					 "FROM rota, voo, pessoa, aeronave " +
+			   		 "WHERE rota.rot_codigo=voo.rot_codigo AND " +
+			   		 "rota.aer_icao_destino=? AND " +
+			   		 "rota.aer_icao_origem=? AND " +
+			   		 "voo.voo_data=? AND " +
+			   		 "pessoa.pes_cpf=voo.pes_cpf AND " +
+			   		 "aeronave.avi_serial_number=voo.avi_serial_number;",
+			   sql2 ="SELECT voo.voo_data, rota.aer_icao_origem, rota.aer_icao_destino, voo.voo_horario_saida, voo.voo_horario_chegada, aeronave.avi_matricula, pessoa.pes_nome " +
+			   		 "FROM rota, voo, pessoa, aeronave " +
+			   		 "WHERE rota.rot_codigo=voo.rot_codigo AND " +
+			   		 "pessoa.pes_cpf=voo.pes_cpf AND " +
+			   		 "aeronave.avi_serial_number=voo.avi_serial_number;";
+
+		Connect();
 		try {
-			Statement stm = con.createStatement();
-			list = stm.executeQuery(sql);
+			PreparedStatement stm;
+			if (orig == "" || dest == "" || data.toGMTString() == "") {
+				stm = con.prepareStatement(sql2);
+			} else {
+				stm = con.prepareStatement(sql);
+				stm.setString(1, dest);
+				stm.setString(2, orig);
+				stm.setDate(3, data);
+			}
+			res = stm.executeQuery();
+			System.out.println("saiu");
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
 		CloseConnection();
-		return list;
+		return res;
 	}
 	
 	

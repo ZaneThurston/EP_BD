@@ -3,18 +3,18 @@
 			String sql = 	"SELECT pes_nome, voo_id FROM rota, voo, pessoa " +
 				   	"WHERE rota.rot_codigo = voo.rot_codigo and" +
 				   	"rota.aer_icao_destino = ? and" +
-				   	"rota.aer_icao_origem = ? and"; +
-				   	"voo.voo_data = ? and";
-					"pessoa.pes_cpf = voo.pes_cpf"
+				   	"rota.aer_icao_origem = ? and" +
+				   	"voo.voo_data = ? and" +
+					"pessoa.pes_cpf = voo.pes_cpf";
 
 
 			Connect();
 			try {
 				PreparedStatement stm;
 					stm = con.prepareStatement(sql5);
-					stm.setInt(1, destino);
-					stm.setInt(1, origem);
-					stm.setDate(1, data);
+					stm.setInt(1, Dest);
+					stm.setInt(2, Orig);
+					stm.setDate(3, data);
 				    res = stm.executeQuery();
 			} catch (SQLException e) {
 				JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);

@@ -8,6 +8,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
@@ -75,9 +77,9 @@ public class panelConsVoos extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				preencheTabela(Orig.getText(), Dest.getText(), new Date(Integer.parseInt(Data.getText().substring(6, 10)), 	//ano
-																		Integer.parseInt(Data.getText().substring(3, 5)), 	//mes
-																		Integer.parseInt(Data.getText().substring(0, 2)))); //dia
+				if (Data.getText() != null) {
+					preencheTabela(Orig.getText(), Dest.getText(), new Date(2005, 10, 03)); //dia
+				}
 			}
 		});
 		
@@ -153,7 +155,7 @@ public class panelConsVoos extends JPanel {
 		model.addColumn("ETA (Hora de chegada)");
 		model.addColumn("Origem");
 		model.addColumn("Destino");
-		model.addColumn("Num. Aeronave");
+		model.addColumn("Matr. Aeronave");
 		model.addColumn("Piloto");
 		table.getColumnModel().getColumn(0).setPreferredWidth(75);
 		table.getColumnModel().getColumn(1).setPreferredWidth(90);
@@ -166,7 +168,18 @@ public class panelConsVoos extends JPanel {
 	}
 	
 	void preencheTabela(String orig, String dest, Date data) {
-		
+		ResultSet list = BdConnector.listaVoos(orig, dest, data);
+		try{
+			while (list.next()) {
+				System.out.println("entrou?");
+				System.out.println(list.getString(1) +" "+ list.getString(2) +" "+ list.getString(3) +" "+ list.getString(4) +" "+ list.getString(5) +" "+ list.getString(6) +" "+
+									list.getString(7) +" "+ list.getString(8) +" "+ list.getString(9) +" ");
+				//model.addRow(new Object[] {list.getDate(2), list.getString(3), list.getString(4), list.getString(4), lista1.getString(5)});
+			}
+			list.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
