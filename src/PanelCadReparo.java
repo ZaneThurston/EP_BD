@@ -38,7 +38,7 @@ public class PanelCadReparo  extends JPanel {
     private JFormattedTextField data;
     private JFormattedTextField preco;
     
-    public PanelCadReparo(UserInterface window, BdConnector conectorBD, InitialPanel init) {
+    public PanelCadReparo(final UserInterface window, final InitialPanel init) {
 
         jButtonVoltar = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();

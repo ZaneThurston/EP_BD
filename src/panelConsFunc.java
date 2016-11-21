@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class panelConsFunc extends JPanel{
-	// WIP -------- criação da interface para consulta de funcionários
+	// WIP -------- criaï¿½ï¿½o da interface para consulta de funcionï¿½rios
 	private JTable table;
 	private JComboBox filtroBox;
 	private JLabel lblCargo;
@@ -39,7 +39,7 @@ public class panelConsFunc extends JPanel{
 	private JButton voltar;
 	private panelConsFunc thisPanel = this;
 	
-	public panelConsFunc(UserInterface window, JPanel ant) {
+	public panelConsFunc(final UserInterface window, final JPanel ant) {
 		setLayout(new MigLayout("", "[grow][grow]", "[][grow]"));
 		
 		lblCargo = new JLabel("Cargo: ");
@@ -63,13 +63,12 @@ public class panelConsFunc extends JPanel{
         });
 		criaTabela();
 		model.setNumRows(0);
-		ResultSet lista = BdConnector.listaFuncionarios(filtroBox.getSelectedItem().toString());
-		preencheTabela(lista, filtroBox.getSelectedItem().toString());
+		preencheTabela( filtroBox.getSelectedItem().toString());
 		filtroBox.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
-				preencheTabela(lista, filtroBox.getSelectedItem().toString());
+				preencheTabela(filtroBox.getSelectedItem().toString());
 			}
 		});
 		
@@ -96,7 +95,8 @@ public class panelConsFunc extends JPanel{
 		table.getColumnModel().getColumn(12).setPreferredWidth(25);
 	}
 	
-	void preencheTabela(ResultSet lista, String param) {
+	void preencheTabela(String param) {
+		ResultSet lista = null;
 		model.setNumRows(0);
 		lista = BdConnector.listaFuncionarios(param);
 		try{

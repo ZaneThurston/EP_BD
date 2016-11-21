@@ -38,7 +38,7 @@ public class PanelCadAeroportos  extends JPanel {
     private JCheckBox chkHub;
     private JCheckBox chkOficina;
     
-    public PanelCadAeroportos(UserInterface window, BdConnector conectorBD, InitialPanel init) {
+    public PanelCadAeroportos(final UserInterface window, final InitialPanel init) {
 
         jButtonVoltar = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();

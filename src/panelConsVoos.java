@@ -36,7 +36,7 @@ public class panelConsVoos extends JPanel {
 	
 	private panelConsVoos thisPanel = this; 
 	
-	public panelConsVoos(UserInterface window, JPanel ant) {
+	public panelConsVoos(final UserInterface window, final JPanel ant) {
 		
 		lblConsultaDeVoos = new JLabel("Consulta de voos");
 		lblConsultaDeVoos.setFont(new Font("Tahoma", Font.BOLD, 13));

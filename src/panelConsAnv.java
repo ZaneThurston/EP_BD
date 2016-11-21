@@ -1,14 +1,11 @@
 import javax.swing.JPanel;
-import net.miginfocom.swing.MigLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
-import javax.swing.JScrollBar;
 import javax.swing.JTable;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -23,7 +20,7 @@ public class panelConsAnv extends JPanel {
 	private JButton btnVoltar;
 	private JPanel thisPanel = this;
 	private DefaultTableModel model;
-	public panelConsAnv(UserInterface window, JPanel ant) {
+	public panelConsAnv(final UserInterface window, final JPanel ant) {
 		
 		JLabel lblFrota = new JLabel("Frota");
 		lblFrota.setFont(new Font("Tahoma", Font.BOLD, 13));

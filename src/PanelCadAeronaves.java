@@ -57,7 +57,7 @@ public class PanelCadAeronaves extends JPanel {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JTextField txtCadModl;
     
-    public PanelCadAeronaves(UserInterface window, InitialPanel init) {
+    public PanelCadAeronaves(final UserInterface window, final InitialPanel init) {
 
         jButtonVoltar = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();

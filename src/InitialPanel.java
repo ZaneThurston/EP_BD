@@ -40,7 +40,7 @@ public class InitialPanel extends JPanel{
     
     
     // constroi o painel na janela da interface, inicializa componentes
-    public InitialPanel(UserInterface window, BdConnector conector) {
+    public InitialPanel(final UserInterface window) {
         CadCli = new JButton("Clientes");
         CadFunc = new JButton("Funcion\u00E1rios");
         CadAeronaves = new JButton("Aeronaves");
@@ -56,7 +56,7 @@ public class InitialPanel extends JPanel{
         CadCli.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PanelCadCli panelCli = new PanelCadCli(window, conector, thisPanel);
+                PanelCadCli panelCli = new PanelCadCli(window, thisPanel);
                 window.atualiza(thisPanel, panelCli);
             }
          });
@@ -72,7 +72,7 @@ public class InitialPanel extends JPanel{
         CadVoos.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PanelCadVoos panelVoos = new PanelCadVoos(window, conector, thisPanel);
+                PanelCadVoos panelVoos = new PanelCadVoos(window, thisPanel);
                 window.atualiza(thisPanel, panelVoos);
             }
         });
@@ -88,7 +88,7 @@ public class InitialPanel extends JPanel{
         CadAirports.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PanelCadAeroportos panelAirports = new PanelCadAeroportos(window, conector, thisPanel);
+                PanelCadAeroportos panelAirports = new PanelCadAeroportos(window, thisPanel);
                 window.atualiza(thisPanel, panelAirports);
             }
         });
@@ -96,7 +96,7 @@ public class InitialPanel extends JPanel{
         CadRepairs.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PanelCadReparo panelRepairs = new PanelCadReparo(window, conector, thisPanel);
+                PanelCadReparo panelRepairs = new PanelCadReparo(window, thisPanel);
                 window.atualiza(thisPanel, panelRepairs);
             }
         });

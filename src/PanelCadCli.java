@@ -66,7 +66,7 @@ public class PanelCadCli extends JPanel {
     PanelCadCli thisPanel = this;
     
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public PanelCadCli(UserInterface window, BdConnector conectorBD, InitialPanel init) {
+	public PanelCadCli(final UserInterface window, final InitialPanel init) {
         lblNome = new JLabel("Nome completo: ");
         lblCPF = new JLabel("CPF: ");
         lblEndereco = new JLabel("Endere\u00E7o ");
@@ -122,7 +122,7 @@ public class PanelCadCli extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				salvarDados(conectorBD);
+				salvarDados();
 			}
 		});
         
@@ -273,12 +273,12 @@ public class PanelCadCli extends JPanel {
         );
     }                        
     
-    static void salvarDados(BdConnector conector) {
+    static void salvarDados() {
     	String nascDate = Niver.getText();
     	BdConnector.insere_pessoa(Integer.parseInt(CPF.getText()),
     							Nome.getText(),
     							Sexo.getSelectedItem().toString().charAt(0),
-    							new Date(Integer.parseInt(nascDate.substring(6, 10)), Integer.parseInt(nascDate.substring(3, 5)), Integer.parseInt(nascDate.substring(0, 2))),
+    							new Date(Integer.parseInt(nascDate.substring(6)), Integer.parseInt(nascDate.substring(3, 5)), Integer.parseInt(nascDate.substring(0, 2))),
     							Email.getText(),
     							Rua.getText(),
     							Integer.parseInt(Numero.getText()),

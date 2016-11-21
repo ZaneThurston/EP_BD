@@ -31,7 +31,7 @@ public class panelConsReparo extends JPanel {
 	private JTextField gastoTot;
 	
 	
-	public panelConsReparo(UserInterface window, JPanel ant) {
+	public panelConsReparo(final UserInterface window, final JPanel ant) {
 		
 		lblManutenoDaFrota = new JLabel("Manuten\u00E7\u00E3o da frota - Reparos");
 		lblManutenoDaFrota.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -120,9 +120,9 @@ public class panelConsReparo extends JPanel {
 	
 	void criaTabela() {
 		table.setModel(model);
-		model.addColumn("CPF Técnico responsável");
+		model.addColumn("CPF Tï¿½cnico responsï¿½vel");
 		model.addColumn("Tipo de check");
-		model.addColumn("Num. série Aeronave");
+		model.addColumn("Num. sï¿½rie Aeronave");
 		model.addColumn("Data");
 		model.addColumn("Valor (R$)");
 		table.getColumnModel().getColumn(0).setPreferredWidth(75);

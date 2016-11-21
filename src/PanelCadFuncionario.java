@@ -114,15 +114,15 @@ public class PanelCadFuncionario extends JPanel {
     
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-	public PanelCadFuncionario(UserInterface window, InitialPanel init) {
+	public PanelCadFuncionario(final UserInterface window, final InitialPanel init) {
         lblNome = new JLabel("Nome completo: ");
         lblCPF = new JLabel("CPF: ");
-        lblEndereco = new JLabel("Endereço ");
+        lblEndereco = new JLabel("Endereï¿½o ");
         lblNiver = new JLabel("Data de nascimento: ");
         lblSexo = new JLabel("Sexo(M ou F): ");
         lblEmail = new JLabel("E-mail: ");
         lblRua = new JLabel("Rua: ");
-        lblNum = new JLabel("Número: ");
+        lblNum = new JLabel("Nï¿½mero: ");
         lblBairro = new JLabel("Bairro: ");
         lblCompl = new JLabel("Complemento: ");
         lblPassaport = new JLabel("Passaporte: ");
@@ -154,7 +154,7 @@ public class PanelCadFuncionario extends JPanel {
         lblEndereco.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblPersoData.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Niver.setFormatterFactory(new DefaultFormatterFactory(new DateFormatter()));
-        SpclNecess.setModel(new DefaultComboBoxModel(new String[] {"Não", "Sim"}));
+        SpclNecess.setModel(new DefaultComboBoxModel(new String[] {"Nï¿½o", "Sim"}));
         Sexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "F", "M" }));
         CPF.setFormatterFactory(new DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
@@ -487,7 +487,7 @@ public class PanelCadFuncionario extends JPanel {
 		BdConnector.insere_pessoa(Integer.parseInt(CPF.getText()),
 				Nome.getText(),
 				Sexo.getSelectedItem().toString().charAt(0),
-				new Date(Integer.parseInt(Niver.getText().substring(6, 10)), Integer.parseInt(Niver.getText().substring(3, 5)), Integer.parseInt(Niver.getText().substring(0, 2))),
+				new Date(Integer.parseInt(Niver.getText().substring(6)), Integer.parseInt(Niver.getText().substring(3, 5)), Integer.parseInt(Niver.getText().substring(0, 2))),
 				Email.getText(),
 				Rua.getText(),
 				Integer.parseInt(Numero.getText()),

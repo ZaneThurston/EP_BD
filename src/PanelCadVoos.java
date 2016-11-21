@@ -37,7 +37,7 @@ public class PanelCadVoos extends JPanel {
     static private JFormattedTextField aerSerial,
     								   routeID;
     
-    public PanelCadVoos(UserInterface window, BdConnector conectorBD, InitialPanel init) {
+    public PanelCadVoos(final UserInterface window, final InitialPanel init) {
 
         jButtonVoltar = new javax.swing.JButton();
         jButtonSave = new javax.swing.JButton();
@@ -56,7 +56,7 @@ public class PanelCadVoos extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				salvaCampos(conectorBD);
+				salvaCampos();
 			}
 		});
 
@@ -207,7 +207,7 @@ public class PanelCadVoos extends JPanel {
     	Dest.setText("");
     }
     
-    static void salvaCampos(BdConnector conector) {
+    static void salvaCampos() {
 
     	//conector.insere_voo(voo_id, voo_data, voo_horario_saida, voo_horario_chegada, avi_serial_number, rot_codigo, pes_cpf);
     }

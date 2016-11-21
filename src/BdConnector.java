@@ -9,9 +9,6 @@
  * @author Marcos
  */
 import java.sql.Statement;
-import java.util.LinkedList;
-import java.util.List;
-
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.Date;
@@ -22,29 +19,28 @@ import java.sql.SQLException;
 
 
 public class BdConnector {
-   static String url = "jdbc:postgresql://localhost:5432/cia_aerea",
-                 user = "postgres",
-                 password = "123456";
+   static String url = "jdbc:postgresql://localhost:5432/cia_aerea";
    static Connection con;
     BdConnector() { 
     }
     
     
-    public static int Connect() {
+    public static int Connect(String user, String password) {
         try {
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
-            return 1;
+        	JOptionPane.showMessageDialog(null, "NÃ£o foi possÃ­vel logar no banco de dados, usuÃ¡rio e/ou senha invÃ¡lido(s).", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+            return 0;
         }
-        return 0;
+        return 1;
     }
     
     public static int CloseConnection() {
          try {
             if (!con.isClosed()) con.close();
          } catch (SQLException e) {
-             System.out.println("Não foi possível fechar a conexão com o banco de dados.");
+             System.out.println("Nï¿½o foi possï¿½vel fechar a conexï¿½o com o banco de dados.");
              return 1;
          }
          return 0;
@@ -65,19 +61,19 @@ public class BdConnector {
      static void insere_comissario_linguas(int com_lin_cpf, String com_lin_lingua) {
 		String sql = "INSERT INTO comissario_linguas (com_lin_cpf,com_lin_lingua) VALUES ('"+com_lin_cpf+
 				"','"+com_lin_lingua+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_comissario_linguas() {
 		String sql = "SELECT * FROM comissario_linguas";
-		Connect();
+		
 				
 		try {
 			Statement stm = con.createStatement();
@@ -89,16 +85,16 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
 	
 	// WIP
-	// Impasse: cadastrar voo usando o código de rota ou fazer uma busca com base na origem e destino inseridos pelo usuário?
+	// Impasse: cadastrar voo usando o cï¿½digo de rota ou fazer uma busca com base na origem e destino inseridos pelo usuï¿½rio?
 	static void insere_voo(Date voo_data, String voo_horario_saida, String voo_horario_chegada, int avi_serial_number, int rot_codigo, int  pes_cpf) {
 		int id;
 		String sql = "INSERT INTO voo (voo_id, voo_data, voo_horario_saida, voo_horario_chegada, avi_serial_number, rot_codigo, pes_cpf) VALUES (?, ?, ?, ?, ?, ?, ?);",
 			   pk = "SELECT COUNT(*) FROM voo";
-		Connect();
+		
 		try {
 			Statement cont = con.createStatement();
 			PreparedStatement stm = con.prepareStatement(sql);
@@ -115,25 +111,25 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
 	
 	public static void insere_reparo(int tec_cpf, String man_codigo, int avi_serial_number, Date rep_date, float rep_orcamento) {
 		String sql = "INSERT INTO reparo (tec_cpf,man_codigo) VALUES ('"+tec_cpf+
 				"','"+man_codigo+"','"+avi_serial_number+"','"+rep_date+"','"+rep_orcamento+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_reparo() {
 		String sql = "SELECT * FROM reparo";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -147,25 +143,25 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
 
 	static void insere_rota(int rot_codigo, String aer_icao_origem, String aer_icao_destino, String rot_frequencia) {
 		String sql = "INSERT INTO rota (rot_codigo,aer_icao_origem,aer_icao_destino,rot_frequencia) VALUES ('"+rot_codigo+
 				"','"+aer_icao_origem+"','"+aer_icao_destino+"','"+rot_frequencia+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_rota() {
 		String sql = "SELECT * FROM rota";
-		Connect();		
+			
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -179,24 +175,24 @@ public class BdConnector {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}	
 
     static void insere_aeroporto_portoes(String  aer_icao, String aer_por_portao) {
 		String sql = "INSERT INTO aeroporto_portoes (aer_icao,aer_por_portao,pas_classe) VALUES ('"+aer_icao+"','"+aer_por_portao+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_aeroporto_portoes() {
 		String sql = "SELECT * FROM aeroporto_portoes";
-		Connect();			
+				
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -207,23 +203,23 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}	
 	static void insere_manutencao(int man_codigo , String man_nome, String man_desricao) {
 		String sql = "INSERT INTO manutencao(man_codigo ,man_nome,man_descricao,pas_classe) VALUES ('"+man_codigo +"','"+man_nome+"','"+man_desricao+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	public static void lista_manutencao() {
 		String sql = "SELECT * FROM manutencao";
-		Connect();				
+						
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -236,24 +232,24 @@ public class BdConnector {
 			// TODO Auto-generated catch block
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
 		
-	    public static void insere_passagem(String pas_coluna, String pas_fileira,int voo_id,String pas_classe, Date pas_data_compra) {
+	public static void insere_passagem(String pas_coluna, String pas_fileira,int voo_id,String pas_classe, Date pas_data_compra) {
 		String sql = "INSERT INTO passagem (pas_coluna,pas_fileira) VALUES ('"+pas_coluna+"','"+pas_fileira+"','"+voo_id+"','"+pas_classe+"','"+pas_data_compra+"','"+pas_coluna+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_passagem() {
 		String sql = "SELECT * FROM passagem";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -267,26 +263,26 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
 
 
 	static void insere_aeroporto(String aer_icao, String aer_nome, String aer_cidade, String aer_estado, boolean aer_oficina, int aer_hub, String aer_park) {
 		String sql = "INSERT INTO aeroporto (aer_icao,aer_nome,aer_cidade,aer_estado,aer_oficina,aer_hub,aer_park) VALUES ('"+aer_icao+
 				"','"+aer_nome+"','"+aer_cidade+"','"+aer_estado+"','"+aer_oficina+"','"+aer_hub+"','"+aer_park+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_aeroporto() {
 		String sql = "SELECT * FROM aeroporto";
-		Connect();				
+					
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -303,26 +299,26 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}	
 
 
 	static void insere_comissario(int pes_cpf, String com_cht) {
 		String sql = "INSERT INTO comissario (pes_cpf,com_cht) VALUES ('"+pes_cpf+
 				"','"+com_cht+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_comissario() {
 		String sql = "SELECT * FROM comissario";
-		Connect();				
+					
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -333,25 +329,25 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}	
 
 	static void insere_habilitacoes(int pil_hab_cpf, String pil_hab_habilitacao) {
 		String sql = "INSERT INTO piloto_habilitacoes (pil_hab_cpf,pil_hab_habilitacao) VALUES ('"+pil_hab_cpf+
 				"','"+pil_hab_habilitacao+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_habilitacoes() {
 		String sql = "SELECT * FROM piloto_habilitacoes";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -362,25 +358,25 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
 
 	static void insere_tecnico(int pes_cpf, String tec_anac, String tec_tipo_contrato) {
 		String sql = "INSERT INTO tecnico_manutencao (pes_cpf,tec_anac,tec_tipo_contrato) VALUES ('"+pes_cpf+
 				"','"+tec_anac+"','"+tec_tipo_contrato+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_tecnico() {
 		String sql = "SELECT * FROM tecnico_manutencao";
-		Connect();
+		
 				
 		try {
 			Statement stm = con.createStatement();
@@ -393,12 +389,12 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}	
 
 	static void insere_aeronave(int avi_serial_number, String avi_matricula, String avi_modelo, String avi_categoria, int avi_capacidade) {
 		String sql1 = "INSERT INTO aeronave (avi_serial_number,avi_matricula,avi_modelo,avi_categoria) VALUES (?, ?, ?, ?);";
-		Connect();
+		
 		try {
 			PreparedStatement stm = con.prepareStatement(sql1);
 			stm.setInt(1, avi_serial_number);
@@ -409,12 +405,12 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nao foi possivel salvar os valores", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_aeronave() {
 		String sql = "SELECT * FROM aeronave";
-		Connect();
+		
 				
 		try {
 			Statement stm = con.createStatement();
@@ -429,25 +425,25 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}	
 
 	static void insere_bagagem(int bag_numero, int bag_peso, int pes_cpf) {
 		String sql = "INSERT INTO bagagem (bag_numero,bag_peso,pes_cpf) VALUES ('"+bag_numero+
 				"','"+bag_peso+"','"+pes_cpf+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_bagagem() {
 		String sql = "SELECT * FROM bagagem";
-		Connect();
+		
 				
 		try {
 			Statement stm = con.createStatement();
@@ -462,25 +458,25 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}	
 
 	static void insere_piloto(int pes_cpf, String pil_breve, int pil_horas_voo) {
 		String sql = "INSERT INTO piloto (pes_cpf,pil_breve,pil_horas_voo) VALUES ('"+pes_cpf+
 				"','"+pil_breve+"','"+pil_horas_voo+"');";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			stm.executeUpdate(sql);
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_piloto() {
 		String sql = "SELECT * FROM piloto";
-		Connect();
+		
 				
 		try {
 			Statement stm = con.createStatement();
@@ -495,7 +491,7 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}	
 
 	
@@ -517,15 +513,15 @@ public class BdConnector {
 		String sql = "INSERT INTO pessoa"
 				+" (pes_cpf, pes_nome, pes_sexo, pes_bday, pes_mail, pes_rua, pes_numero, pes_bairro, pes_complemento, pes_flag_cliente, pes_flag_empregado," 
 				+" pes_cod_func, pes_tipo_func, pes_passaporte, pes_necessidades_especiais)"
-				+" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // não importa que tenha os '?', eles serão substituidos ao setar os campos no preparedStatement
-		Connect();
+				+" VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; // nï¿½o importa que tenha os '?', eles serï¿½o substituidos ao setar os campos no preparedStatement
+		
 		try {
 			
 			// PreparedStatement, uma forma mais "bonita" pra executar uma query
 			PreparedStatement stm = con.prepareStatement(sql); // prepara o statement com uma string generalizada do comando SQL
-			stm.setInt(1, pes_cpf); 						// índice de parâmetros começa no 1, passa o cpf como int
+			stm.setInt(1, pes_cpf); 						// ï¿½ndice de parï¿½metros comeï¿½a no 1, passa o cpf como int
 			stm.setString(2, pes_nome);						// 2, passa o nome como String
-			stm.setString(3, Character.toString(pes_sexo));	// 3, passa o sexo como String (conversão pra char fica a cargo da API)
+			stm.setString(3, Character.toString(pes_sexo));	// 3, passa o sexo como String (conversï¿½o pra char fica a cargo da API)
 			stm.setDate(4, pes_bday);						// 4, etc.
 			stm.setString(5, pes_mail);
 			stm.setString(6, pes_rua);
@@ -539,16 +535,16 @@ public class BdConnector {
 			stm.setString(14, pes_passaporte);
 			stm.setString(15, pes_necessidades_especiais);
 			
-			stm.executeUpdate();	// executa o comando, não precisa passar a string como parâmetro pois já foi passada antes
+			stm.executeUpdate();	// executa o comando, nï¿½o precisa passar a string como parï¿½metro pois jï¿½ foi passada antes
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
  
 	static void lista_pessoa() {
 		String sql = "SELECT * FROM pessoa";
-		Connect();
+		
 		try {
 			Statement stm = con.createStatement();
 			ResultSet consulta = stm.executeQuery(sql);
@@ -572,19 +568,19 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Erro", "Nao foi possivel salvar os valores", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
 		}
-		CloseConnection();
+		
 	}
 
 	
 // -------------------------- CONSULTAS -----------------------------------------------------
-/*	Código padrão
+/*	Cï¿½digo padrï¿½o
  * 	String sql = "";
  * 	Connect();
 	try {
 		PreparedStatement stm = con.prepareStatement(sql);
 		ResultSet res = stm.executeQuery();
 	} catch (SQLException e) {
-		JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+		JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 	}
 	CloseConnection();
 */
@@ -593,7 +589,7 @@ public class BdConnector {
 		ResultSet results = null;
 		String sql = "SELECT * FROM pessoa WHERE pes_flag_empregado=true;",
 		       sql2 = sql.replace(';', ' ') + "AND pes_tipo_func=?;";
-		Connect();
+		
 		try {
 			
 			PreparedStatement stm;
@@ -622,21 +618,21 @@ public class BdConnector {
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Dados nao encontrados.", "Erro", JOptionPane.OK_OPTION);
 		}
-		CloseConnection();
+		
 		return results;
 	}
 
 	static ResultSet listaFrota() {
 		ResultSet fleet = null;
 		String sql = "SELECT * FROM aeronave";
-		Connect();
+		
 		try {
 			PreparedStatement stm = con.prepareStatement(sql);
 			fleet = stm.executeQuery();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
-		CloseConnection();
+		
 		return fleet;
 	}
 	
@@ -644,7 +640,7 @@ public class BdConnector {
 		ResultSet res = null;
 		String sql = "SELECT * FROM reparo",
 			   sql2 = sql + " WHERE avi_serial_number=?";
-		Connect();
+		
 		try {
 			PreparedStatement stm;
 			if (serial < 1) stm = con.prepareStatement(sql);
@@ -654,9 +650,9 @@ public class BdConnector {
 			}
 			res = stm.executeQuery();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
-		CloseConnection();
+		
 		return res;
 	}
 	
@@ -676,7 +672,7 @@ public class BdConnector {
 			   		 "pessoa.pes_cpf=voo.pes_cpf AND " +
 			   		 "aeronave.avi_serial_number=voo.avi_serial_number;";
 
-		Connect();
+		
 		try {
 			PreparedStatement stm;
 			if (orig == "" || dest == "" || data.toGMTString() == "") {
@@ -690,9 +686,9 @@ public class BdConnector {
 			res = stm.executeQuery();
 			System.out.println("saiu");
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
-		CloseConnection();
+		
 		return res;
 	}
 
@@ -700,7 +696,7 @@ public class BdConnector {
 		ResultSet res = null;
 		String sql = 	"SELECT sum(rep_orcamento) FROM reparo",
 			   sql2 = sql + " WHERE avi_serial_number= ?"; 
-		Connect();
+		
 		try {
 			PreparedStatement stm;
 			if (serial >0) {
@@ -709,9 +705,9 @@ public class BdConnector {
 			} else stm = con.prepareStatement(sql);
 			res = stm.executeQuery();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Não foi possível recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
-		CloseConnection();
+		
 		return res;
 	}
 	

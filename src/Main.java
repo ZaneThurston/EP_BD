@@ -1,3 +1,5 @@
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowStateListener;
 
 import javax.swing.JPanel;
 
@@ -12,10 +14,10 @@ import javax.swing.JPanel;
  * @author Marcos
  */
 public class Main {
-    static BdConnector conector;
     public static void main (String args[]) {
         UserInterface janela = new UserInterface();
-        InitialPanel t = new InitialPanel(janela, conector);
+        BDLogin t = new BDLogin(janela, new InitialPanel(janela));
         janela.atualiza(new JPanel(), t);
+        
     }
 }
