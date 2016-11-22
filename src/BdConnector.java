@@ -29,9 +29,7 @@ public class BdConnector {
     public static int Connect(String user, String password) {
         try {
             Class.forName("org.postgresql.Driver");
-            //con = DriverManager.getConnection(url, "phillip", "260196");
             con = DriverManager.getConnection(url, user, password);
-            JOptionPane.showMessageDialog(null, user+" "+password, "Dados", JOptionPane.OK_OPTION);
         } catch (ClassNotFoundException | SQLException e) {
         	JOptionPane.showMessageDialog(null, "Não foi possível logar no banco de dados, usuário e/ou senha inválido(s).", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
             return 0;
@@ -659,7 +657,7 @@ public class BdConnector {
 		return res;
 	}
 	
-	static ResultSet listaVoos(String orig, String dest, Date data) {
+	static ResultSet listaVoos(String orig, String dest, String data) {
 		ResultSet res = null;
 		String sql = "SELECT * from voo "+
 					 "WHERE rot_codigo IN (SELECT rot_codigo FROM rota WHERE aer_icao_origem "+
@@ -691,7 +689,7 @@ public class BdConnector {
 				stm = con.prepareStatement(sql);
 				stm.setString(1, orig);
 				stm.setString(2, dest);
-				stm.setDate(3, data);
+				stm.setString(3, data);
 			//}
 			res = stm.executeQuery();
 		} catch (SQLException e) {

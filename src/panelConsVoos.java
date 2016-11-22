@@ -76,9 +76,7 @@ public class panelConsVoos extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (Data.getText() != null) {
-					preencheTabela(Orig.getText(), Dest.getText(), new Date(Integer.parseInt(Data.getText().substring(6)), 
-																			Integer.parseInt(Data.getText().substring(3, 5)),
-																			Integer.parseInt(Data.getText().substring(0, 2)))); //dia
+					preencheTabela(Orig.getText(), Dest.getText(), Data.getText()); //dia
 				}
 			}
 		});
@@ -167,7 +165,7 @@ public class panelConsVoos extends JPanel {
 		
 	}
 	
-	void preencheTabela(String orig, String dest, Date data) {
+	void preencheTabela(String orig, String dest, String data) {
 		ResultSet list = BdConnector.listaVoos(orig, dest, data);
 		try{
 			while (list.next()) {
