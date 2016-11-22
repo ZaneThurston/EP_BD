@@ -44,12 +44,10 @@ public class panelConsVoos extends JPanel {
 		lblOrigem = new JLabel("Origem:");
 		
 		Orig = new JTextField();
-		Orig.setColumns(10);
 		
 		lblDestino = new JLabel("Destino:");
 		
 		Dest = new JTextField();
-		Dest.setColumns(10);
 		
 		lblData = new JLabel("Data:");
 		
@@ -59,9 +57,7 @@ public class panelConsVoos extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if (Data.getText() != null) {
-					preencheTabela(Orig.getText(), Dest.getText(), Data.getText()); //dia
-				}
+				preencheTabela(Orig.getText(), Dest.getText(), Data.getText()); //dia
 			}
 		});
 		
@@ -88,13 +84,17 @@ public class panelConsVoos extends JPanel {
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
-						.addComponent(lblConsultaDeVoos)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 643, Short.MAX_VALUE)
+								.addComponent(lblConsultaDeVoos)
+								.addComponent(btnVoltar))
+							.addContainerGap())
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(lblOrigem)
+							.addGap(16)
+							.addComponent(Orig, GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(Orig, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
 							.addComponent(lblDestino)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(Dest, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
@@ -103,9 +103,8 @@ public class panelConsVoos extends JPanel {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(Data, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
 							.addGap(18)
-							.addComponent(btnPesquisar))
-						.addComponent(btnVoltar))
-					.addContainerGap())
+							.addComponent(btnPesquisar)
+							.addGap(98))))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -151,9 +150,12 @@ public class panelConsVoos extends JPanel {
 	
 	void preencheTabela(String orig, String dest, String data) {
 		ResultSet list = BdConnector.listaVoos(orig, dest, data);
+		System.out.println("from origin: "+Orig.getText()+" "+ Dest.getText()+" "+ Data.getText());
+		System.out.println("preencheTabela: "+orig+ "  "+dest+"  "+data);
+		model.setNumRows(0);
 		try{
 			while (list.next()) {
-				model.addRow(new Object[] {list.getInt(1), list.getDate(2), list.getString(3), list.getString(4), list.getInt(5), list.getInt(6), list.getInt(7)});
+				model.addRow(new Object[] {list.getInt(1), list.getString(2), list.getString(3), list.getString(4), list.getInt(5), list.getInt(6), list.getInt(7)});
 			}
 			list.close();
 		} catch (SQLException e) {

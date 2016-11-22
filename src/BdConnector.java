@@ -659,37 +659,23 @@ public class BdConnector {
 	
 	static ResultSet listaVoos(String orig, String dest, String data) {
 		ResultSet res = null;
-		String sql = "SELECT * from voo "+
+		String sql = "SELECT * FROM voo "+
 					 "WHERE rot_codigo IN (SELECT rot_codigo FROM rota WHERE aer_icao_origem "+
-					 "IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=?) " +
-					 "AND aer_icao_destino IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=?) " +
-					 "AND voo_data=?)";
-		
-		/*String sql = "SELECT voo.voo_data, rota.aer_icao_origem, rota.aer_icao_destino, voo.voo_horario_saida, voo.voo_horario_chegada, aeronave.avi_matricula, pessoa.pes_nome "+
-					 "FROM rota, voo, pessoa, aeronave " +
-			   		 "WHERE rota.rot_codigo=voo.rot_codigo AND " +
-			   		 "rota.aer_icao_destino=? AND " +
-			   		 "rota.aer_icao_origem=? AND " +
-			   		 "voo.voo_data=? AND " +
-			   		 "pessoa.pes_cpf=voo.pes_cpf AND " +
-			   		 "aeronave.avi_serial_number=voo.avi_serial_number;",
-			   		 
-			   sql2 ="SELECT voo.voo_data, rota.aer_icao_origem, rota.aer_icao_destino, voo.voo_horario_saida, voo.voo_horario_chegada, aeronave.avi_matricula, pessoa.pes_nome " +
-			   		 "FROM rota, voo, pessoa, aeronave " +
-			   		 "WHERE rota.rot_codigo=voo.rot_codigo AND " +
-			   		 "pessoa.pes_cpf=voo.pes_cpf AND " +
-			   		 "aeronave.avi_serial_number=voo.avi_serial_number;";
-		*/
-		
+					 "IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=orig) " +
+					 "AND aer_icao_destino IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=dest) " +
+					 "AND voo_data=data);";
+		System.out.println("listaVoos: "+orig+" "+dest+" "+data);
 		try {
 			PreparedStatement stm;
 			stm = con.prepareStatement(sql);
 			stm.setString(1, orig);
 			stm.setString(2, dest);
 			stm.setString(3, data);
+			System.out.println("listaVoos2: "+orig+" "+dest+" "+data);
 			res = stm.executeQuery();
 			stm.close();
 		} catch (SQLException e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "N�o foi poss�vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
 		
