@@ -601,13 +601,13 @@ public class BdConnector {
 				stm = con.prepareStatement(sql2);
 				stm.setString(1, "Piloto");
 				break;
-			case "Comissario":
+			case "Comissário":
 				stm = con.prepareStatement(sql2);
-				stm.setString(1, "Comissario");
+				stm.setString(1, "Comissário");
 				break;
-			case "Mecanico":
+			case "Mecânico":
 				stm = con.prepareStatement(sql2);
-				stm.setString(1, "Mecanico");
+				stm.setString(1, "Mecânico");
 				break;
 			case "Interno":
 				stm = con.prepareStatement(sql2);
@@ -661,7 +661,13 @@ public class BdConnector {
 	
 	static ResultSet listaVoos(String orig, String dest, Date data) {
 		ResultSet res = null;
-		String sql = "SELECT voo.voo_data, rota.aer_icao_origem, rota.aer_icao_destino, voo.voo_horario_saida, voo.voo_horario_chegada, aeronave.avi_matricula, pessoa.pes_nome "+
+		String sql = "SELECT * from voo "+
+					 "WHERE rot_codigo IN (SELECT rot_codigo FROM rota WHERE aer_icao_origem "+
+					 "IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=?) " +
+					 "AND aer_icao_destino IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=?) " +
+					 "AND voo_data=?)";
+		
+		/*String sql = "SELECT voo.voo_data, rota.aer_icao_origem, rota.aer_icao_destino, voo.voo_horario_saida, voo.voo_horario_chegada, aeronave.avi_matricula, pessoa.pes_nome "+
 					 "FROM rota, voo, pessoa, aeronave " +
 			   		 "WHERE rota.rot_codigo=voo.rot_codigo AND " +
 			   		 "rota.aer_icao_destino=? AND " +
@@ -669,25 +675,25 @@ public class BdConnector {
 			   		 "voo.voo_data=? AND " +
 			   		 "pessoa.pes_cpf=voo.pes_cpf AND " +
 			   		 "aeronave.avi_serial_number=voo.avi_serial_number;",
+			   		 
 			   sql2 ="SELECT voo.voo_data, rota.aer_icao_origem, rota.aer_icao_destino, voo.voo_horario_saida, voo.voo_horario_chegada, aeronave.avi_matricula, pessoa.pes_nome " +
 			   		 "FROM rota, voo, pessoa, aeronave " +
 			   		 "WHERE rota.rot_codigo=voo.rot_codigo AND " +
 			   		 "pessoa.pes_cpf=voo.pes_cpf AND " +
 			   		 "aeronave.avi_serial_number=voo.avi_serial_number;";
-
+		*/
 		
 		try {
 			PreparedStatement stm;
-			if (orig == "" || dest == "" || data.toGMTString() == "") {
+			/*if (orig == "" || dest == "" || data.toGMTString() == "") {
 				stm = con.prepareStatement(sql2);
-			} else {
+			} else {*/
 				stm = con.prepareStatement(sql);
-				stm.setString(1, dest);
-				stm.setString(2, orig);
+				stm.setString(1, orig);
+				stm.setString(2, dest);
 				stm.setDate(3, data);
-			}
+			//}
 			res = stm.executeQuery();
-			System.out.println("saiu");
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
