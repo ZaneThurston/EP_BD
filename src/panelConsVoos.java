@@ -28,7 +28,6 @@ public class panelConsVoos extends JPanel {
 				   lblDestino,
 				   lblConsultaDeVoos,
 				   lblData;
-	private JFormattedTextField Data;
 	private JButton btnPesquisar,
 					btnVoltar;
 	private JScrollPane scrollPane;
