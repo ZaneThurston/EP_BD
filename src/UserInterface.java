@@ -3,14 +3,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
-import java.awt.event.WindowStateListener;
+
 
 /**
  *
@@ -31,50 +31,12 @@ public class UserInterface extends JFrame {
         mainWindow.setVisible(true);
         mainWindow.setResizable(false);
         mainWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        mainWindow.addWindowListener(new WindowListener() {
-			@Override
-			public void windowClosing(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				BdConnector.CloseConnection();
-				
-			}
-
-			@Override
-			public void windowActivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowClosed(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowDeiconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowIconified(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void windowOpened(WindowEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+        mainWindow.addWindowListener(new WindowAdapter() {
+        	public void windowClosing(WindowEvent e) {
+        		BdConnector.CloseConnection();
+        		System.exit(0);
+        	}     	
+        });
     }
     
     // troca um frame por outro dentro da janela

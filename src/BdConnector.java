@@ -29,6 +29,7 @@ public class BdConnector {
         try {
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(url, user, password);
+            System.out.println(user+" "+password);
         } catch (ClassNotFoundException | SQLException e) {
         	JOptionPane.showMessageDialog(null, "Não foi possível logar no banco de dados, usuário e/ou senha inválido(s).", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
             return 0;
