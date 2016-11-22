@@ -21,15 +21,16 @@ import java.sql.SQLException;
 public class BdConnector {
    static String url = "jdbc:postgresql://localhost:5432/cia_aerea";
    static Connection con;
-    BdConnector() { 
+    BdConnector() {
+    	
     }
     
     
     public static int Connect(String user, String password) {
         try {
             Class.forName("org.postgresql.Driver");
-            con = DriverManager.getConnection(url, user, password);
-            System.out.println(user+" "+password);
+            con = DriverManager.getConnection(url, "phillip", "260196");
+            JOptionPane.showMessageDialog(null, user+" "+password, "Dados", JOptionPane.OK_OPTION);
         } catch (ClassNotFoundException | SQLException e) {
         	JOptionPane.showMessageDialog(null, "Não foi possível logar no banco de dados, usuário e/ou senha inválido(s).", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
             return 0;
