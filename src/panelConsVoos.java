@@ -150,8 +150,7 @@ public class panelConsVoos extends JPanel {
 	
 	void preencheTabela(String orig, String dest, String data) {
 		ResultSet list = BdConnector.listaVoos(orig, dest, data);
-		System.out.println("from origin: "+Orig.getText()+" "+ Dest.getText()+" "+ Data.getText());
-		System.out.println("preencheTabela: "+orig+ "  "+dest+"  "+data);
+
 		model.setNumRows(0);
 		try{
 			while (list.next()) {

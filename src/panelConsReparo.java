@@ -33,10 +33,10 @@ public class panelConsReparo extends JPanel {
 	
 	public panelConsReparo(final UserInterface window, final JPanel ant) {
 		
-		lblManutenoDaFrota = new JLabel("Manuten\u00E7\u00E3o da frota - Reparos");
+		lblManutenoDaFrota = new JLabel("Manutencao da frota - Reparos");
 		lblManutenoDaFrota.setFont(new Font("Tahoma", Font.BOLD, 13));
 		
-		lblNumSrieAeronave = new JLabel("Num. s\u00E9rie Aeronave:");
+		lblNumSrieAeronave = new JLabel("Num. serie Aeronave:");
 		
 		numSerie = new JFormattedTextField();
 		numSerie.setFormatterFactory(new DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
@@ -65,7 +65,7 @@ public class panelConsReparo extends JPanel {
 			}
 		});
 		
-		lblGastos = new JLabel("Gastos com manuten\u00E7\u00E3o da(s) aeronave(s) filtradas R$:");
+		lblGastos = new JLabel("Gastos com manutencao da(s) aeronave(s) filtradas R$:");
 		
 		gastoTot = new JTextField();
 		gastoTot.setEditable(false);
@@ -120,9 +120,9 @@ public class panelConsReparo extends JPanel {
 	
 	void criaTabela() {
 		table.setModel(model);
-		model.addColumn("CPF T�cnico respons�vel");
+		model.addColumn("CPF Tecnico responsavel");
 		model.addColumn("Tipo de check");
-		model.addColumn("Num. s�rie Aeronave");
+		model.addColumn("Num. serie Aeronave");
 		model.addColumn("Data");
 		model.addColumn("Valor (R$)");
 		table.getColumnModel().getColumn(0).setPreferredWidth(75);

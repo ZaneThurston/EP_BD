@@ -31,8 +31,9 @@ public class BdConnector {
             Class.forName("org.postgresql.Driver");
             con = DriverManager.getConnection(url, user, password);
         } catch (ClassNotFoundException | SQLException e) {
-        	JOptionPane.showMessageDialog(null, "NÃ£o foi possÃ­vel logar no banco de dados, usuÃ¡rio e/ou senha invÃ¡lido(s).", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
+        	JOptionPane.showMessageDialog(null, "Nao foi possivel logar no banco de dados, usuario e/ou senha invalido(s).", "Erro", JOptionPane.OK_OPTION); //mostra uma caixa de dialogo
             return 0;
+            
         }
         return 1;
     }
@@ -603,13 +604,13 @@ public class BdConnector {
 				stm = con.prepareStatement(sql2);
 				stm.setString(1, "Comissário");
 				break;
-			case "Mecânico":
+			/*(case "Mecânico":
 				stm = con.prepareStatement(sql2);
 				stm.setString(1, "Mecânico");
-				break;
+				break;*/
 			case "Interno":
 				stm = con.prepareStatement(sql2);
-				stm.setString(1, "Interno");
+				stm.setString(1, "Limpeza");
 				break;
 			default:
 				stm = con.prepareStatement(sql);
@@ -631,7 +632,7 @@ public class BdConnector {
 			PreparedStatement stm = con.prepareStatement(sql);
 			fleet = stm.executeQuery();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nao foi possivel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
 		
 		return fleet;
@@ -651,32 +652,31 @@ public class BdConnector {
 			}
 			res = stm.executeQuery();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nao foi possivel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
 		
 		return res;
 	}
 	
+	// problema na query de pesquisa impede execução do código
 	static ResultSet listaVoos(String orig, String dest, String data) {
 		ResultSet res = null;
 		String sql = "SELECT * FROM voo "+
 					 "WHERE rot_codigo IN (SELECT rot_codigo FROM rota WHERE aer_icao_origem "+
-					 "IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=orig) " +
-					 "AND aer_icao_destino IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=dest) " +
-					 "AND voo_data=data);";
+					 "IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=?) " +
+					 "AND aer_icao_destino IN (SELECT aer_icao FROM aeroporto WHERE aeroporto.aer_loc_cidade=?)); ";// +
+					 //"AND voo_data=?);";
 		System.out.println("listaVoos: "+orig+" "+dest+" "+data);
 		try {
 			PreparedStatement stm;
 			stm = con.prepareStatement(sql);
 			stm.setString(1, orig);
 			stm.setString(2, dest);
-			stm.setString(3, data);
-			System.out.println("listaVoos2: "+orig+" "+dest+" "+data);
+			//stm.setDate(3, new Date(Integer.parseInt(data.substring(0,4)), Integer.parseInt(data.substring(5,7)), Integer.parseInt(data.substring(8))));
 			res = stm.executeQuery();
-			stm.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nao foi possivel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
 		
 		return res;
@@ -695,9 +695,30 @@ public class BdConnector {
 			} else stm = con.prepareStatement(sql);
 			res = stm.executeQuery();
 		} catch (SQLException e) {
-			JOptionPane.showMessageDialog(null, "Nï¿½o foi possï¿½vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "Nao foi possivel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
 		
+		return res;
+	}
+	
+	// problema "Este resultSet está fechado"
+	static ResultSet listaVoosComiss(String cpf, String data1, String data2) {
+		ResultSet res = null;
+		String sql = "select * from voo, voo_comissarios " +
+					 "where voo.voo_id=voo_comissarios.voo_id "+
+					 "and voo_comissarios.com_cpf=?; ";// +
+					 //"and voo.voo_data between ? and ?;";
+		try {
+			PreparedStatement stm;
+			stm = con.prepareStatement(sql);
+			stm.setLong(1, Long.parseLong(cpf));
+			//stm.setDate(2, new Date(Integer.parseInt(data1.substring(0,4)), Integer.parseInt(data1.substring(5,7)), Integer.parseInt(data1.substring(8))));
+			//stm.setDate(3, new Date(Integer.parseInt(data2.substring(0,4)), Integer.parseInt(data2.substring(5,7)), Integer.parseInt(data2.substring(8))));
+			res = stm.executeQuery();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Nao foi possivel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
+		}
 		return res;
 	}
 	

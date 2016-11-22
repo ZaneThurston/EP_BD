@@ -37,12 +37,13 @@ public class InitialPanel extends JPanel{
     InitialPanel thisPanel = this;
     private JLabel Cadastro;
     private JLabel lblConsultas;
+    private JButton conVoosPorComissario;
     
     
     // constroi o painel na janela da interface, inicializa componentes
     public InitialPanel(final UserInterface window) {
         CadCli = new JButton("Clientes");
-        CadFunc = new JButton("Funcion\u00E1rios");
+        CadFunc = new JButton("Funcionarios");
         CadAeronaves = new JButton("Aeronaves");
         CadAirports = new JButton("Aeroportos");
         CadVoos = new JButton("Voos");
@@ -102,10 +103,10 @@ public class InitialPanel extends JPanel{
         });
         
         Cadastro = new JLabel("Cadastro");
-        Cadastro.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        Cadastro.setFont(new Font("Tahoma", Font.BOLD, 13));
         
         lblConsultas = new JLabel("Consultas");
-        lblConsultas.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblConsultas.setFont(new Font("Tahoma", Font.BOLD, 13));
         
      // action listeners para os botos de consultas
         
@@ -130,7 +131,7 @@ public class InitialPanel extends JPanel{
 			}
 		});
         
-        conFunc = new JButton("Funcion\u00E1rios");
+        conFunc = new JButton("Funcionarios");
         conFunc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -147,6 +148,16 @@ public class InitialPanel extends JPanel{
 				// TODO Auto-generated method stub
 				panelConsReparo panelConReps = new panelConsReparo(window, thisPanel);
 				window.atualiza(thisPanel, panelConReps);
+			}
+		});
+        
+        conVoosPorComissario = new JButton("Voos por comissario");
+        conVoosPorComissario.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				PanelConsVoosComiss panel = new PanelConsVoosComiss(window, thisPanel);
+				window.atualiza(thisPanel, panel);
 			}
 		});
         
@@ -177,8 +188,10 @@ public class InitialPanel extends JPanel{
         					.addPreferredGap(ComponentPlacement.UNRELATED)
         					.addComponent(btnFrota)
         					.addPreferredGap(ComponentPlacement.UNRELATED)
-        					.addComponent(ConReparos)))
-        			.addContainerGap(82, Short.MAX_VALUE))
+        					.addComponent(ConReparos)
+        					.addPreferredGap(ComponentPlacement.UNRELATED)
+        					.addComponent(conVoosPorComissario)))
+        			.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         groupLayout.setVerticalGroup(
         	groupLayout.createParallelGroup(Alignment.LEADING)
@@ -200,7 +213,8 @@ public class InitialPanel extends JPanel{
         				.addComponent(conFunc)
         				.addComponent(conVoos)
         				.addComponent(btnFrota)
-        				.addComponent(ConReparos))
+        				.addComponent(ConReparos)
+        				.addComponent(conVoosPorComissario))
         			.addContainerGap(120, Short.MAX_VALUE))
         );
         setLayout(groupLayout);

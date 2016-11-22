@@ -154,7 +154,7 @@ public class PanelCadFuncionario extends JPanel {
         lblEndereco.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         lblPersoData.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
         Niver.setFormatterFactory(new DefaultFormatterFactory(new DateFormatter()));
-        SpclNecess.setModel(new DefaultComboBoxModel(new String[] {"Nï¿½o", "Sim"}));
+        SpclNecess.setModel(new DefaultComboBoxModel(new String[] {"Não", "Sim"}));
         Sexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "F", "M" }));
         CPF.setFormatterFactory(new DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
 
@@ -197,14 +197,14 @@ public class PanelCadFuncionario extends JPanel {
         Cargo.setModel(new DefaultComboBoxModel(new String[] {"Interno", "Piloto", "Comissario", "Mecanico"}));
   
         
-        JLabel lblNmFuncionrio = new JLabel("N\u00FAm Funcion\u00E1rio:");
+        JLabel lblNmFuncionrio = new JLabel("Num Funcionario:");
         
         CodFunc = new JFormattedTextField();
         CodFunc.setFormatterFactory(new DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         
         lblPiloto = new JLabel("Piloto");
         
-        lblNmAnac = new JLabel("N\u00FAm ANAC:");
+        lblNmAnac = new JLabel("Num ANAC:");
         
         lblHabAeronaves = new JLabel("Hab. Aeronaves:");
         
@@ -217,9 +217,9 @@ public class PanelCadFuncionario extends JPanel {
         
         HorasVoo = new JFormattedTextField();
         
-        lblComissrio = new JLabel("Comiss\u00E1rio");
+        lblComissrio = new JLabel("Comissario");
         
-        lblTcnicoDeManuteno = new JLabel("T\u00E9cnico de manuten\u00E7\u00E3o");
+        lblTcnicoDeManuteno = new JLabel("Tecnico de manutencao");
         
         lblChtCom = new JLabel("CHT:");
         
@@ -239,7 +239,7 @@ public class PanelCadFuncionario extends JPanel {
         lblTipoDeContrato = new JLabel("Tipo de contrato:");
         
         Contrato = new JComboBox();
-        Contrato.setModel(new DefaultComboBoxModel(new String[] {"Tempor\u00E1rio", "Efetivo"}));
+        Contrato.setModel(new DefaultComboBoxModel(new String[] {"Temporário", "Efetivo"}));
         
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         layout.setHorizontalGroup(
@@ -499,6 +499,7 @@ public class PanelCadFuncionario extends JPanel {
 				cargo,
 				Passaport.getText(),
 				SpclNecess.getSelectedItem().toString());
+		System.out.println(Niver.getText());
     	
 		switch (cargo) {
     	case "Piloto":

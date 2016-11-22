@@ -46,7 +46,7 @@ public class panelConsFunc extends JPanel{
 		add(lblCargo, "cell 0 0,alignx right");
 		
 		filtroBox = new JComboBox();
-		filtroBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Interno", "Piloto", "Comissário", "Mecânico"}));
+		filtroBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Interno", "Piloto", "Comissário"}));
 		add(filtroBox, "cell 1 0,alignx left");
 		model = new DefaultTableModel();
 		table = new JTable(model);
