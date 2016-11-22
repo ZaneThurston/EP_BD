@@ -22,7 +22,8 @@ import javax.swing.JTable;
 
 public class panelConsVoos extends JPanel {
 	private JTextField Orig,
-					   Dest;
+					   Dest,
+					   Data;
 	private JLabel lblOrigem,
 				   lblDestino,
 				   lblConsultaDeVoos,
@@ -53,23 +54,7 @@ public class panelConsVoos extends JPanel {
 		
 		lblData = new JLabel("Data:");
 		
-		Data = new JFormattedTextField();
-		Data.setFormatterFactory(new DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-		Data.addFocusListener(new FocusListener() {
-			
-			@Override
-			public void focusLost(FocusEvent e) {
-				// TODO Auto-generated method stub
-				System.out.println(Data.getText());
-				System.out.println();
-			}
-			
-			@Override
-			public void focusGained(FocusEvent e) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		Data = new JTextField();
 		btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			@Override

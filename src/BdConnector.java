@@ -683,15 +683,12 @@ public class BdConnector {
 		
 		try {
 			PreparedStatement stm;
-			/*if (orig == "" || dest == "" || data.toGMTString() == "") {
-				stm = con.prepareStatement(sql2);
-			} else {*/
-				stm = con.prepareStatement(sql);
-				stm.setString(1, orig);
-				stm.setString(2, dest);
-				stm.setString(3, data);
-			//}
+			stm = con.prepareStatement(sql);
+			stm.setString(1, orig);
+			stm.setString(2, dest);
+			stm.setString(3, data);
 			res = stm.executeQuery();
+			stm.close();
 		} catch (SQLException e) {
 			JOptionPane.showMessageDialog(null, "N�o foi poss�vel recuperar os dados", "Erro", JOptionPane.OK_OPTION);
 		}
