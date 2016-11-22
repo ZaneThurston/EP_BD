@@ -33,7 +33,11 @@ public class UserInterface extends JFrame {
         mainWindow.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         mainWindow.addWindowListener(new WindowAdapter() {
         	public void windowClosing(WindowEvent e) {
-        		BdConnector.CloseConnection();
+        		try {
+        			BdConnector.CloseConnection();
+        		} catch (java.lang.NullPointerException exc) {
+        			
+        		}
         		System.exit(0);
         	}     	
         });
