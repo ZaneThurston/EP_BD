@@ -5,21 +5,19 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.JTextField;
-import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+@SuppressWarnings("serial")
 public class panelConsVoos extends JPanel {
 	private JTextField Orig,
 					   Dest,
@@ -57,7 +55,7 @@ public class panelConsVoos extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				preencheTabela(Orig.getText(), Dest.getText(), Data.getText()); //dia
+				preencheTabela(Orig.getText(), Dest.getText(), LocalDate.parse(Data.getText())); //dia
 			}
 		});
 		
@@ -148,7 +146,7 @@ public class panelConsVoos extends JPanel {
 		
 	}
 	
-	void preencheTabela(String orig, String dest, String data) {
+	void preencheTabela(String orig, String dest, LocalDate data) {
 		ResultSet list = BdConnector.listaVoos(orig, dest, data);
 
 		model.setNumRows(0);

@@ -2,6 +2,7 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
@@ -274,11 +275,12 @@ public class PanelCadCli extends JPanel {
     }                        
     
     static void salvarDados() {
-    	String nascDate = Niver.getText();
+    	LocalDate nascDate;
+    	nascDate = LocalDate.parse(Niver.getText());
     	BdConnector.insere_pessoa(Integer.parseInt(CPF.getText()),
     							Nome.getText(),
     							Sexo.getSelectedItem().toString().charAt(0),
-    							new Date(Integer.parseInt(nascDate.substring(6)), Integer.parseInt(nascDate.substring(3, 5)), Integer.parseInt(nascDate.substring(0, 2))),
+    							Date.valueOf(nascDate),
     							Email.getText(),
     							Rua.getText(),
     							Integer.parseInt(Numero.getText()),

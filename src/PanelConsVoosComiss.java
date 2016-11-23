@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
@@ -54,7 +55,7 @@ public class PanelConsVoosComiss extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				preencheTabela(CPF.getText(), data1.getText(), data2.getText());
+				preencheTabela(CPF.getText(), LocalDate.parse(data1.getText()), LocalDate.parse(data2.getText()));
 			}
 		});
 		
@@ -74,6 +75,10 @@ public class PanelConsVoosComiss extends JPanel {
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		criaTabela();
 		
+		JLabel lblDe = new JLabel("De:");
+		
+		JLabel lblAte = new JLabel("Ate:");
+		
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -91,12 +96,16 @@ public class PanelConsVoosComiss extends JPanel {
 										.addComponent(CPF)))
 								.addGap(18)
 								.addComponent(btnPesquisar)
-								.addGap(23)
-								.addComponent(lblDatas)
 								.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(data1, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE)
-								.addGap(33)
-								.addComponent(data2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblDatas)
+								.addGap(18)
+								.addComponent(lblDe)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(data1, GroupLayout.PREFERRED_SIZE, 78, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addComponent(lblAte)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(data2, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))
 							.addComponent(scrollPane, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 679, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
@@ -111,10 +120,12 @@ public class PanelConsVoosComiss extends JPanel {
 						.addComponent(CPF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 						.addComponent(btnPesquisar)
 						.addComponent(data2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblDatas)
-						.addComponent(data1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblAte)
+						.addComponent(data1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblDe)
+						.addComponent(lblDatas))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+					.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnVoltar)
 					.addContainerGap())
@@ -140,9 +151,8 @@ public class PanelConsVoosComiss extends JPanel {
 		table.getColumnModel().getColumn(5).setPreferredWidth(100);
 	}
 
-	void preencheTabela(String cpf, String data1, String data2) {
+	void preencheTabela(String cpf, LocalDate data1, LocalDate data2) {
 		ResultSet list;
-		//model.setNumRows(0);
 		list = BdConnector.listaVoosComiss(cpf, data1, data2);
 		try{
 			while (list.next()) {

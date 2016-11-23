@@ -17,6 +17,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+@SuppressWarnings("serial")
 public class panelConsReparo extends JPanel {
 	JLabel lblManutenoDaFrota,
 		   lblNumSrieAeronave;
